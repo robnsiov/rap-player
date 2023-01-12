@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  ::selection {
+    @apply bg-one-dark;
+  }
+  body {
+    height: 100vh;
+  }
+}
+
+@layer utilities {
+  .break-word {
+    word-break: break-word;
+  }
+}
+
+@layer components {
+  .fade-enter {
+    @apply opacity-0;
+  }
+  .fade-enter-active {
+    @apply opacity-100  transition-all duration-300;
+  }
+  .fade-exit {
+    @apply opacity-100;
+  }
+  .fade-exit-active {
+    @apply opacity-0 transition-all duration-300;
+  }
+}
