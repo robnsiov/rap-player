@@ -4,8 +4,11 @@ import React, { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import FadeAnimImpl from "./types";
 
-function FadeAnimation({ inProp, children }: FadeAnimImpl) {
-  console.log(inProp);
+function FadeScaleAnimation({
+  inProp,
+  children,
+  className = "",
+}: FadeAnimImpl) {
   const nodeRef = useRef(null);
   return (
     <CSSTransition
@@ -16,23 +19,20 @@ function FadeAnimation({ inProp, children }: FadeAnimImpl) {
         //   appear: "my-appear",
         //   appearActive: "my-active-appear",
         //   appearDone: "my-done-appear",
-        enter: "fade-enter",
-        enterActive: "fade-enter-active",
+        enter: "fade-scale-enter",
+        enterActive: "fade-scale-enter-active",
         //   enterDone: "my-done-enter",
-        exit: "fade-exit",
-        exitActive: "fade-exit-active",
+        exit: "fade-scale-exit",
+        exitActive: "fade-scale-exit-active",
         //   exitDone: "my-done-exit",
       }}
       unmountOnExit
     >
-      <div
-        // className="w-full h-full flex items-center justify-center"
-        ref={nodeRef}
-      >
+      <div className={className} ref={nodeRef}>
         {children}
       </div>
     </CSSTransition>
   );
 }
 
-export default FadeAnimation;
+export default FadeScaleAnimation;

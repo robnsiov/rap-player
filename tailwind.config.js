@@ -6,7 +6,6 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    
     screens: {
       "2xl": { max: "1535px" },
       // => @media (max-width: 1535px) { ... }
@@ -31,7 +30,20 @@ module.exports = {
         "3xl": "0 0 31px #fff",
       },
       colors: {
-        "one-dark": "#181D27",
+        "one-dark": {
+          DEFAULT: "#181D27",
+          100: "#181d2726",
+          200: "#2c313af2",
+          400: "#222938",
+        },
+        "one-white": "#181d27f2",
+        backdrop: "#00000064",
+      },
+      keyframes: {
+        wave: {
+          "0%, 100%": { height: "4px" },
+          "50%": { height: "16px" },
+        },
       },
     },
   },
