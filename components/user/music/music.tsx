@@ -9,14 +9,16 @@ import MusicBackdrop from "./music-backdrop/music-backdrop";
 import { HiHome, HiOutlineHome } from "react-icons/hi";
 import { FiChevronDown } from "react-icons/fi";
 import { TbMusic } from "react-icons/tb";
+import ShadowBorder from "../../UI/borders/shadow-border";
+import MusicContainer from "../../share/music-container/music-container";
 
 const Music = () => {
   const { showBackdrop, toggleBackdrop } = useMusic();
   const [like, setLike] = useState(false);
   return (
     <>
-      <div className="overflow-hidden h-full bg-one-dark rounded-2xl flex items-center justify-start flex-col p-4 relative w-[350px] mr-2">
-        <div className="w-full text-white  flex justify-between items-center mb-6">
+      <MusicContainer className="mr-2 md:hidden">
+        <div className="w-full text-white   flex justify-between items-center mb-6">
           <FiChevronDown className="text-xl cursor-pointer" />
           <span className="font-medium">Now Playing</span>
           <TbMusic className="text-xl cursor-pointer" />
@@ -98,7 +100,7 @@ const Music = () => {
             </span>
           </div>
         </div>
-      </div>
+      </MusicContainer>
     </>
   );
 };

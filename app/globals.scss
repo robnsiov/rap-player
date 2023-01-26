@@ -8,6 +8,8 @@
   }
   body {
     height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
 }
 
@@ -48,5 +50,3 @@
     @apply opacity-0 scale-75 transition-all duration-300;
   }
 }
-
-

@@ -16,7 +16,7 @@ const TopMusics = () => {
         effect={"cards"}
         grabCursor={true}
         modules={[EffectCards]}
-        className="w-[280px] h-[180px]"
+        className="w-[280px] old:w-[200px]  h-[180px]"
       >
         <SwiperSlide className="rounded-lg shadow-sm shadow-white  relative">
           <div className="absolute inset-0">
