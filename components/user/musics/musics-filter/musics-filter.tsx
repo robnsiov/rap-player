@@ -1,3 +1,4 @@
+"use client";
 import Backdrop from "../../../share/backdrop/backdrop";
 import { RiCloseCircleLine } from "react-icons/ri";
 import useMusicsFilter from "./use-musics-filter";
@@ -6,6 +7,13 @@ import ScaleAnimation from "../../../share/animations/scale/scale-animation";
 import Switch from "react-switch";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import AutocomplteItems from "../../../share/autocomplete-item/autocomplete-item";
+import Select, { IndicatorSeparatorProps } from "react-select";
+import { useState } from "react";
+const options = [
+  { value: "chocolate", label: "Chocolate", id: 3 },
+  { value: "strawberry", label: "Strawberry", id: 2 },
+  { value: "vanilla", label: "Vanilla", id: 1 },
+];
 
 const MusicsFilter = ({
   clickOnSearch,
@@ -103,6 +111,68 @@ const MusicsFilter = ({
                       iconColor: "#444f6a",
                       clearIconMargin: "4px 8px",
                       hoverBackgroundColor: "",
+                      searchIconMargin: "0 0 0 8px",
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex p-3 text-sm items-center justify-end w-full">
+                <div className="w-full">
+                  <Select
+                    id="selectbox"
+                    instanceId="selectbox"
+                    closeMenuOnSelect={false}
+                    isMulti
+                    options={options}
+                    unstyled={true}
+                    styles={{
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        border: "2px solid #181D27",
+                        boxShadow: "red",
+                        background: "transparent",
+                        padding: "5px 10px",
+                        borderRadius: "6px",
+                        minHeight: "43px",
+                      }),
+                      menuList: (baseStyles, state) => ({
+                        ...baseStyles,
+                        background: "#2C313A",
+                        border: "2px solid #181D27",
+                        borderRadius: "6px",
+                        marginTop: "5px",
+                      }),
+                      option: (baseStyles, state) => ({
+                        ...baseStyles,
+                        padding: "5px 8px",
+                        cursor: "pointer",
+                      }),
+                      indicatorsContainer: (baseStyles, state) => ({
+                        ...baseStyles,
+                        color: "#444f6a",
+                      }),
+                      indicatorSeparator: (baseStyles, state) => ({
+                        ...baseStyles,
+                        background: "#444f6a",
+                      }),
+                      multiValue: (baseStyles, state) => ({
+                        ...baseStyles,
+                        border: "2px solid #181D27",
+                        padding: "0px 5px",
+                        borderRadius: "4px",
+                        margin: "2px",
+                        ":last-child": {
+                          marginBottom: "0",
+                        },
+                      }),
+                      multiValueRemove: (baseStyles, state) => ({
+                        ...baseStyles,
+                        marginLeft: "6px",
+                      }),
+                      noOptionsMessage: (baseStyles, state) => ({
+                        ...baseStyles,
+                        margin: "6px 0",
+                      }),
                     }}
                   />
                 </div>

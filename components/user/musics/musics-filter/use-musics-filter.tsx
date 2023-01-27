@@ -9,7 +9,7 @@ const useMusicsFilter = ({
   clickOnSearch,
   toggleClickOnSearch,
 }: UseMusicsFilterImpl) => {
-  const [showBackdrop, setShowBackdrop] = useState(false);
+  const [showBackdrop, setShowBackdrop] = useState(!false);
   const [activeTopMusicsSwitch, setActiveTopMusicsSwithch] = useState(false);
 
   const toggleActiveTopMusicsSwitch = () => {
