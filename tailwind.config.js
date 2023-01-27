@@ -20,7 +20,7 @@ module.exports = {
       // => @media (max-width: 767px) { ... }
 
       sm: { max: "639px" },
-      old: { max: "350px" },
+      old: { max: "380px" },
       // => @media (max-width: 639px) { ... }
     },
     extend: {
@@ -39,6 +39,7 @@ module.exports = {
         },
         "one-white": "#181d27f2",
         backdrop: "#00000064",
+        "one-gray": "#e1e1e164",
       },
       keyframes: {
         wave: {

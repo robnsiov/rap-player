@@ -1,23 +1,33 @@
 import { CgMore } from "react-icons/cg";
 import { FiChevronLeft } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
+import ScaleAnimation from "../../share/animations/scale/scale-animation";
 import MusicContainer from "../../share/music-container/music-container";
+import MusicHeader from "../../share/music-header/music-header";
 import MusicsFilter from "./musics-filter/musics-filter";
 import TopMusics from "./top-musics/top-musics";
+import useMusics from "./use-musics";
 
 const Musics = () => {
+  const { clickOnSearch, toggleClickOnSearch } = useMusics();
   return (
     <>
       <MusicContainer>
-        <MusicsFilter />
-        <div className="w-full text-white pr-4 pl-4 flex justify-between items-center mb-6">
+        
+        <MusicHeader>
           <FiChevronLeft className="text-xl cursor-pointer" />
-
-          <GoSearch className="text-xl cursor-pointer" />
-        </div>
-        <div className="flex justify-center items-center pr-4 pl-4 pb-6">
-          <TopMusics />
-        </div>
+          <ScaleAnimation scale="0.95">
+            <GoSearch
+              onClick={toggleClickOnSearch}
+              className="text-xl cursor-pointer"
+            />
+          </ScaleAnimation>
+        </MusicHeader>
+        <MusicsFilter
+          toggleClickOnSearch={toggleClickOnSearch}
+          clickOnSearch={clickOnSearch}
+        />
+        <TopMusics />
         <div className="w-full flex items-center justify-start flex-col relative">
           <div className="w-full p-4  text-sm flex justify-between items-center  text-white relative cursor-pointer rounded-lg group">
             <span className="bg-one-dark-200 duration-200 transition-all absolute top-0 bottom-0 w-[20px] opacity-0 group-hover:w-full group-hover:opacity-100 center-absolute rounded-lg z-20"></span>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import FadeScaleAnimation from "../../../share/animations/fade-scale/fade-scale-animation";
 import MusicBackdropImpl from "./types";
+import Backdrop from "../../../share/backdrop/backdrop";
 
 const MusicBackdrop = ({
   src,
@@ -20,12 +21,7 @@ const MusicBackdrop = ({
   }, [showBackdrop]);
   return (
     <>
-      <div
-        onClick={toggleBackdrop}
-        className={` cursor-pointer absolute z-[100] backdrop-blur-2xl bg-back duration-200 inset-0 rounded-2xl grid place-items-center ${
-          showBackdrop ? "opacity-100" : "opacity-0 invisible"
-        }`}
-      >
+      <Backdrop showBackdrop={showBackdrop} toggleBackdrop={toggleBackdrop}>
         <FadeScaleAnimation
           className="w-full h-full grid place-items-center"
           inProp={showImage}
@@ -39,7 +35,7 @@ const MusicBackdrop = ({
             />
           </div>
         </FadeScaleAnimation>
-      </div>
+      </Backdrop>
     </>
   );
 };

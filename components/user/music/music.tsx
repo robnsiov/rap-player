@@ -11,18 +11,19 @@ import { FiChevronDown } from "react-icons/fi";
 import { TbMusic } from "react-icons/tb";
 import ShadowBorder from "../../UI/borders/shadow-border";
 import MusicContainer from "../../share/music-container/music-container";
+import MusicHeader from "../../share/music-header/music-header";
 
 const Music = () => {
   const { showBackdrop, toggleBackdrop } = useMusic();
   const [like, setLike] = useState(false);
   return (
     <>
-      <MusicContainer className="mr-2 md:hidden">
-        <div className="w-full text-white   flex justify-between items-center mb-6">
+      <MusicContainer className="mr-4 md:hidden">
+        <MusicHeader>
           <FiChevronDown className="text-xl cursor-pointer" />
           <span className="font-medium">Now Playing</span>
           <TbMusic className="text-xl cursor-pointer" />
-        </div>
+        </MusicHeader>
         <MusicBackdrop
           src={landing}
           toggleBackdrop={toggleBackdrop}

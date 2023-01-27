@@ -3,7 +3,10 @@ import classes from "./shadow-border.module.scss";
 const ShadowBorder = () => {
   return (
     <>
-      <span className={classes["block"]}></span>
+      <div>
+        <span className={`${classes["block"]} md:hidden`}></span>
+        <span className="absolute inset-[-5px] bg-one-dark-200 hidden md:block"></span>
+      </div>
     </>
   );
 };
