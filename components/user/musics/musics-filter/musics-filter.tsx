@@ -4,16 +4,11 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import useMusicsFilter from "./use-musics-filter";
 import MusicsFilterImpl from "./types";
 import ScaleAnimation from "../../../share/animations/scale/scale-animation";
-import Switch from "react-switch";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import AutocomplteItems from "../../../share/autocomplete-item/autocomplete-item";
-import Select, { IndicatorSeparatorProps } from "react-select";
-import { useState } from "react";
-const options = [
-  { value: "chocolate", label: "Chocolate", id: 3 },
-  { value: "strawberry", label: "Strawberry", id: 2 },
-  { value: "vanilla", label: "Vanilla", id: 1 },
-];
+import SwitchFilter from "./switch-filter/switch-filter";
+import AutocompleteFilter from "./autocomplete-filter/autocomplete-filter";
+import FadeAnimation from "../../../share/animations/fade/fade-animation";
+
 
 const MusicsFilter = ({
   clickOnSearch,
@@ -22,9 +17,10 @@ const MusicsFilter = ({
   const {
     showBackdrop,
     toggleShowBackdrop,
-    toggleActiveTopMusicsSwitch,
-    activeTopMusicsSwitch,
-    handleOnSelectAutocompleInput,
+    changeTitleOnFilterData,
+    filterData,
+    changeSwitchOnFilterData,
+    musicNames,
   } = useMusicsFilter({
     clickOnSearch,
     toggleClickOnSearch,
@@ -55,145 +51,78 @@ const MusicsFilter = ({
 
   return (
     <>
-      <Backdrop showBackdrop={showBackdrop}>
-        <div className="text-gray-400 bg-one-dark-200  absolute inset-2 rounded-xl flex items-center justify-between flex-col">
-          <div className="w-full flex justify-center items-start flex-col">
-            <div className="w-full ml-3 mt-3 flex items-center justify-start">
-              <ScaleAnimation scale={"0.9"}>
-                <RiCloseCircleLine
-                  onClick={toggleShowBackdrop}
-                  className="text-xl"
+      <FadeAnimation inProp={showBackdrop} className="absolute inset-0 z-[100]">
+        <Backdrop showBackdrop={showBackdrop}>
+          <div className="text-gray-400 bg-one-dark-200  absolute inset-2 rounded-xl flex items-center justify-between flex-col">
+            <div className="w-full flex justify-center items-start flex-col">
+              <div className="w-full ml-3 mt-3 mb-5 flex items-center justify-start">
+                <ScaleAnimation scale={"0.9"}>
+                  <RiCloseCircleLine
+                    onClick={toggleShowBackdrop}
+                    className="text-xl"
+                  />
+                </ScaleAnimation>
+              </div>
+              <SwitchFilter
+                onChange={(check) => changeSwitchOnFilterData("top", check)}
+                checked={filterData.top as boolean}
+                title="Top Musics"
+              />
+              <SwitchFilter
+                onChange={(check) => changeSwitchOnFilterData("demo", check)}
+                checked={filterData.demo as boolean}
+                title="Demo"
+              />
+              <SwitchFilter
+                onChange={(check) => changeSwitchOnFilterData("visited", check)}
+                checked={filterData.visited as boolean}
+                title="Most Visited"
+              />
+              <SwitchFilter
+                onChange={(check) => changeSwitchOnFilterData("played", check)}
+                checked={filterData.played as boolean}
+                title="Most Played"
+              />
+              <SwitchFilter
+                onChange={(check) => changeSwitchOnFilterData("liked", check)}
+                checked={filterData.liked as boolean}
+                title="Most Liekd"
+              />
+
+              <div className="flex mt-1 items-center justify-center flex-col w-full">
+                <AutocompleteFilter
+                  items={musicNames}
+                  placeholder="Music name..."
+                  formatResult={AutocomplteItems}
+                  onSelect={changeTitleOnFilterData}
                 />
+                {/* <MultiSelectFilter placeholder="Artists" options={musicNames} />
+                <MultiSelectFilter
+                  placeholder="Categories"
+                  options={musicNames}
+                />
+                <MultiSelectFilter
+                  placeholder="Remix Creators"
+                  options={musicNames}
+                /> */}
+              </div>
+            </div>
+            <div className="p-3 max-w-[400px] w-full">
+              <ScaleAnimation
+                scale={"0.99"}
+                className="w-full border-gray-400 rounded-xl text-gray-400 border-2"
+              >
+                <div
+                  onClick={toggleShowBackdrop}
+                  className="w-full p-2 text-center"
+                >
+                  Apply
+                </div>
               </ScaleAnimation>
             </div>
-            <div className="mt-2 flex items-center justify-center flex-col w-full">
-              <div className="flex p-3 text-sm items-center justify-between w-full">
-                <span>Top Music</span>
-                <Switch
-                  onChange={toggleActiveTopMusicsSwitch}
-                  checked={activeTopMusicsSwitch}
-                  uncheckedIcon={false}
-                  width={30}
-                  height={6}
-                  checkedIcon={false}
-                  borderRadius={999}
-                  handleDiameter={17}
-                  activeBoxShadow="0 0 1px 2px #373e4a"
-                  onColor="#181D27"
-                  offColor="#61666e"
-                  offHandleColor="#373e4a"
-                  onHandleColor="#373e4a"
-                />
-              </div>
-            </div>
-            <div className="flex items-center justify-center flex-col w-full">
-              <div className="flex p-3 text-sm items-center justify-end w-full">
-                <div className="w-full">
-                  <ReactSearchAutocomplete
-                    items={items}
-                    // onSearch={handleOnSearch}
-                    // onHover={handleOnHover}
-                    onSelect={handleOnSelectAutocompleInput}
-                    // onFocus={handleOnFocus}
-                    autoFocus
-                    formatResult={AutocomplteItems}
-                    placeholder="Enter Something..."
-                    styling={{
-                      height: "40px",
-                      border: "2px solid #181D27",
-                      backgroundColor: "transparent",
-                      boxShadow: "",
-                      color: "#9198A3",
-                      placeholderColor: "#9198A3",
-                      fontSize: "14px",
-                      borderRadius: "6px",
-                      lineColor: "#373e4a",
-                      iconColor: "#444f6a",
-                      clearIconMargin: "4px 8px",
-                      hoverBackgroundColor: "",
-                      searchIconMargin: "0 0 0 8px",
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="flex p-3 text-sm items-center justify-end w-full">
-                <div className="w-full">
-                  <Select
-                    id="selectbox"
-                    instanceId="selectbox"
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={options}
-                    unstyled={true}
-                    styles={{
-                      control: (baseStyles) => ({
-                        ...baseStyles,
-                        border: "2px solid #181D27",
-                        boxShadow: "red",
-                        background: "transparent",
-                        padding: "5px 10px",
-                        borderRadius: "6px",
-                        minHeight: "43px",
-                      }),
-                      menuList: (baseStyles, state) => ({
-                        ...baseStyles,
-                        background: "#2C313A",
-                        border: "2px solid #181D27",
-                        borderRadius: "6px",
-                        marginTop: "5px",
-                      }),
-                      option: (baseStyles, state) => ({
-                        ...baseStyles,
-                        padding: "5px 8px",
-                        cursor: "pointer",
-                      }),
-                      indicatorsContainer: (baseStyles, state) => ({
-                        ...baseStyles,
-                        color: "#444f6a",
-                      }),
-                      indicatorSeparator: (baseStyles, state) => ({
-                        ...baseStyles,
-                        background: "#444f6a",
-                      }),
-                      multiValue: (baseStyles, state) => ({
-                        ...baseStyles,
-                        border: "2px solid #181D27",
-                        padding: "0px 5px",
-                        borderRadius: "4px",
-                        margin: "2px",
-                        ":last-child": {
-                          marginBottom: "0",
-                        },
-                      }),
-                      multiValueRemove: (baseStyles, state) => ({
-                        ...baseStyles,
-                        marginLeft: "6px",
-                      }),
-                      noOptionsMessage: (baseStyles, state) => ({
-                        ...baseStyles,
-                        margin: "6px 0",
-                      }),
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
-          <div className="p-3 max-w-[400px] w-full">
-            <ScaleAnimation
-              scale={"0.99"}
-              className="w-full border-gray-400 rounded-xl text-gray-400 border-2"
-            >
-              <div
-                onClick={toggleShowBackdrop}
-                className="w-full p-2 text-center"
-              >
-                Apply
-              </div>
-            </ScaleAnimation>
-          </div>
-        </div>
-      </Backdrop>
+        </Backdrop>
+      </FadeAnimation>
     </>
   );
 };

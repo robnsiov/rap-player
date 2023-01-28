@@ -4,8 +4,7 @@ import React, { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import FadeAnimImpl from "./types";
 
-function FadeAnimation({ inProp, children }: FadeAnimImpl) {
-  console.log(inProp);
+function FadeAnimation({ inProp, children, className = "" }: FadeAnimImpl) {
   const nodeRef = useRef(null);
   return (
     <CSSTransition
@@ -27,6 +26,7 @@ function FadeAnimation({ inProp, children }: FadeAnimImpl) {
     >
       <div
         // className="w-full h-full flex items-center justify-center"
+        className={className}
         ref={nodeRef}
       >
         {children}
