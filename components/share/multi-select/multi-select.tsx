@@ -5,6 +5,8 @@ const MultiSelect = ({
   options,
   placeholder,
   styles = {},
+  onChange,
+  loading = true,
 }: MultiSelectImpl) => {
   const defaultStyles = {
     control: (baseStyles: CSSObjectWithLabel) => ({
@@ -19,7 +21,7 @@ const MultiSelect = ({
     menuList: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
       background: "#2C313A",
-      border: "2px solid #181D27",
+      border: "2px solid #444f6a",
       borderRadius: "6px",
       marginTop: "5px",
     }),
@@ -57,10 +59,14 @@ const MultiSelect = ({
       ...baseStyles,
       marginLeft: "6px",
     }),
-    // noOptionsMessage: (baseStyles, state) => ({
-    //   ...baseStyles,
-    //   margin: "6px 0",
-    // }),
+    noOptionsMessage: (baseStyles: CSSObjectWithLabel) => ({
+      ...baseStyles,
+      margin: "6px 0",
+    }),
+    loadingMessage: (baseStyles: CSSObjectWithLabel) => ({
+      ...baseStyles,
+      margin: "6px 0",
+    }),
     ...styles,
   };
   return (
@@ -74,6 +80,8 @@ const MultiSelect = ({
         unstyled={true}
         placeholder={placeholder}
         styles={defaultStyles}
+        onChange={onChange}
+        isLoading={loading}
       />
     </>
   );

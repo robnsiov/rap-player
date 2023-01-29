@@ -28,6 +28,7 @@ const Music = () => {
           src={landing}
           toggleBackdrop={toggleBackdrop}
           showBackdrop={showBackdrop}
+          
         />
         <div
           onClick={toggleBackdrop}

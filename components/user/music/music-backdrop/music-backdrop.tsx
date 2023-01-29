@@ -23,7 +23,7 @@ const MusicBackdrop = ({
     <>
       <Backdrop showBackdrop={showBackdrop} toggleBackdrop={toggleBackdrop}>
         <FadeScaleAnimation
-          className="w-full h-full grid place-items-center"
+          className="grid place-items-center"
           inProp={showImage}
         >
           <div className="w-[280px] h-[280px]">

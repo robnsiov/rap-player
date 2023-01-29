@@ -5,6 +5,7 @@ import ScaleAnimation from "../../share/animations/scale/scale-animation";
 import MusicContainer from "../../share/music-container/music-container";
 import MusicHeader from "../../share/music-header/music-header";
 import MusicsFilter from "./musics-filter/musics-filter";
+import MusicsLoading from "./musics-loading/musics-loading";
 import TopMusics from "./top-musics/top-musics";
 import useMusics from "./use-musics";
 
@@ -13,7 +14,7 @@ const Musics = () => {
   return (
     <>
       <MusicContainer>
-        
+        <MusicsLoading />
         <MusicHeader>
           <FiChevronLeft className="text-xl cursor-pointer" />
           <ScaleAnimation scale="0.95">
@@ -39,7 +40,7 @@ const Musics = () => {
                   Heaven Heaven Heaven
                 </span>
                 <div className="text-gray-400 font-medium text-[12px] flex justify-start items-center">
-                  <span className="max-w-[150px] truncate">
+                  <span className="max-w-[150px] truncate max-[500px]:bg-red-200">
                     Mr.Kity Mr.Kity Mr.Kity Mr.Kity Mr.Kity
                   </span>
                   <span className="mx-2 w-1 h-1 rounded-full bg-gray-400"></span>{" "}

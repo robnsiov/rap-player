@@ -8,7 +8,7 @@ import AutocomplteItems from "../../../share/autocomplete-item/autocomplete-item
 import SwitchFilter from "./switch-filter/switch-filter";
 import AutocompleteFilter from "./autocomplete-filter/autocomplete-filter";
 import FadeAnimation from "../../../share/animations/fade/fade-animation";
-
+import MultiSelectFilter from "./multiselect-filter/multiselect-filter";
 
 const MusicsFilter = ({
   clickOnSearch,
@@ -16,38 +16,23 @@ const MusicsFilter = ({
 }: MusicsFilterImpl) => {
   const {
     showBackdrop,
-    toggleShowBackdrop,
+    closeFilters,
+    applyFilters,
     changeTitleOnFilterData,
     filterData,
     changeSwitchOnFilterData,
     musicNames,
+    changeMultiSelectOnFilterData,
+    artistNames,
+    categoryNames,
+    remixCreatorNames,
+    categoriesLoading,
+    artistsLoading,
+    remixCreatorsLoading,
   } = useMusicsFilter({
     clickOnSearch,
     toggleClickOnSearch,
   });
-
-  const items = [
-    {
-      id: 0,
-      name: "Cobol",
-    },
-    {
-      id: 1,
-      name: "JavaScript",
-    },
-    {
-      id: 2,
-      name: "Basic",
-    },
-    {
-      id: 3,
-      name: "PHP",
-    },
-    {
-      id: 4,
-      name: "Java",
-    },
-  ];
 
   return (
     <>
@@ -58,7 +43,7 @@ const MusicsFilter = ({
               <div className="w-full ml-3 mt-3 mb-5 flex items-center justify-start">
                 <ScaleAnimation scale={"0.9"}>
                   <RiCloseCircleLine
-                    onClick={toggleShowBackdrop}
+                    onClick={closeFilters}
                     className="text-xl"
                   />
                 </ScaleAnimation>
@@ -96,15 +81,30 @@ const MusicsFilter = ({
                   formatResult={AutocomplteItems}
                   onSelect={changeTitleOnFilterData}
                 />
-                {/* <MultiSelectFilter placeholder="Artists" options={musicNames} />
                 <MultiSelectFilter
-                  placeholder="Categories"
-                  options={musicNames}
+                  onChange={(seleted) =>
+                    changeMultiSelectOnFilterData("artsist", seleted)
+                  }
+                  loading={artistsLoading}
+                  placeholder="Artists"
+                  options={artistNames as object[]}
                 />
                 <MultiSelectFilter
+                  onChange={(seleted) =>
+                    changeMultiSelectOnFilterData("categories", seleted)
+                  }
+                  loading={categoriesLoading}
+                  placeholder="Categories"
+                  options={categoryNames as object[]}
+                />
+                <MultiSelectFilter
+                  onChange={(seleted) =>
+                    changeMultiSelectOnFilterData("remixCreators", seleted)
+                  }
+                  loading={remixCreatorsLoading}
                   placeholder="Remix Creators"
-                  options={musicNames}
-                /> */}
+                  options={remixCreatorNames as object[]}
+                />
               </div>
             </div>
             <div className="p-3 max-w-[400px] w-full">
@@ -112,10 +112,7 @@ const MusicsFilter = ({
                 scale={"0.99"}
                 className="w-full border-gray-400 rounded-xl text-gray-400 border-2"
               >
-                <div
-                  onClick={toggleShowBackdrop}
-                  className="w-full p-2 text-center"
-                >
+                <div onClick={applyFilters} className="w-full p-2 text-center">
                   Apply
                 </div>
               </ScaleAnimation>

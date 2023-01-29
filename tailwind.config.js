@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -21,12 +22,14 @@ module.exports = {
 
       sm: { max: "639px" },
       old: { max: "380px" },
+      // ...defaultTheme.screens,
       // => @media (max-width: 639px) { ... }
     },
     extend: {
       container: {
         center: true,
       },
+
       dropShadow: {
         "3xl": "0 0 31px #fff",
       },
@@ -35,6 +38,7 @@ module.exports = {
           DEFAULT: "#181D27",
           100: "#181d2726",
           200: "#2c313a",
+          500: "#2c313a",
           400: "#222938",
         },
         "one-white": "#181d27f2",
@@ -45,6 +49,12 @@ module.exports = {
         wave: {
           "0%, 100%": { height: "4px" },
           "50%": { height: "16px" },
+        },
+        loadingwave: {
+          "0%, 100%": {
+            height: "20%",
+          },
+          "50%": { height: "100%" },
         },
       },
     },
