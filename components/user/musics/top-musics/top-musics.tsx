@@ -12,7 +12,7 @@ import { BsPlayCircle } from "react-icons/bs";
 const TopMusics = () => {
   return (
     <>
-      <div className="flex justify-center items-center pr-0 pl-0 pb-6 w-[calc(100%+5px)] overflow-hidden">
+      <div className="flex min-h-[210px] justify-center items-center pr-0 pl-0 pb-6 w-[calc(100%+5px)] overflow-hidden">
         <Swiper
           effect={"cards"}
           grabCursor={true}

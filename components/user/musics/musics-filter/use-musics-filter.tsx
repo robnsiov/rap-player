@@ -5,6 +5,7 @@ import useCategoriesStore from "../../../../store/categories-store";
 import useFiltersLoaderStore from "../../../../store/filters-loader-store";
 import useMusicNamesStore from "../../../../store/music-names-store";
 import useRemixCreatorsStore from "../../../../store/remix-creators-store";
+import useShowFiltersStore from "../../../../store/show-filters";
 import { AutocompleteInput } from "../../../share/autocomplete-input/types";
 import { MultiSelectInput } from "../../../share/multi-select/types";
 
@@ -25,11 +26,12 @@ interface FilterData {
 }
 type MusicNames = Array<AutocompleteInput>;
 
-const useMusicsFilter = ({
-  clickOnSearch,
-  toggleClickOnSearch,
-}: UseMusicsFilterImpl) => {
-  const [showBackdrop, setShowBackdrop] = useState(false);
+const useMusicsFilter = () => {
+  // const [showBackdrop, setShowBackdrop] = useState(false);
+  const [onChangeShowFilters, showFilters] = useShowFiltersStore((state) => [
+    state.onChange,
+    state.show,
+  ]);
   const [filterData, setFilterData] = useState<FilterData>({
     top: true,
     demo: true,
@@ -92,7 +94,7 @@ const useMusicsFilter = ({
 
   const closeFilters = () => {
     setTimeout(() => {
-      setShowBackdrop((prev) => !prev);
+      onChangeShowFilters(!showFilters);
     }, 50);
   };
   const applyFilters = () => {
@@ -112,14 +114,6 @@ const useMusicsFilter = ({
   };
 
   useEffect(() => {
-    if (clickOnSearch) closeFilters();
-  }, [clickOnSearch]);
-
-  useEffect(() => {
-    if (showBackdrop) toggleClickOnSearch();
-  }, [showBackdrop]);
-
-  useEffect(() => {
     setCategoryNames(categories);
   }, [categories]);
   useEffect(() => {
@@ -135,7 +129,7 @@ const useMusicsFilter = ({
   }, [musicNamesData]);
 
   return {
-    showBackdrop,
+    showBackdrop: showFilters,
     closeFilters,
     filterData,
     changeSwitchOnFilterData,

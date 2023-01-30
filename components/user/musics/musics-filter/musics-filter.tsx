@@ -10,10 +10,7 @@ import AutocompleteFilter from "./autocomplete-filter/autocomplete-filter";
 import FadeAnimation from "../../../share/animations/fade/fade-animation";
 import MultiSelectFilter from "./multiselect-filter/multiselect-filter";
 
-const MusicsFilter = ({
-  clickOnSearch,
-  toggleClickOnSearch,
-}: MusicsFilterImpl) => {
+const MusicsFilter = () => {
   const {
     showBackdrop,
     closeFilters,
@@ -29,14 +26,11 @@ const MusicsFilter = ({
     categoriesLoading,
     artistsLoading,
     remixCreatorsLoading,
-  } = useMusicsFilter({
-    clickOnSearch,
-    toggleClickOnSearch,
-  });
+  } = useMusicsFilter();
 
   return (
     <>
-      <FadeAnimation inProp={showBackdrop} className="absolute inset-0 z-[100]">
+      <FadeAnimation inProp={showBackdrop} className="absolute inset-0 z-[200]">
         <Backdrop showBackdrop={showBackdrop}>
           <div className="text-gray-400 bg-one-dark-200  absolute inset-2 rounded-xl flex items-center justify-between flex-col">
             <div className="w-full flex justify-center items-start flex-col">

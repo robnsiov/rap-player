@@ -22,6 +22,7 @@ module.exports = {
 
       sm: { max: "639px" },
       old: { max: "380px" },
+      "354px": { max: "354px" },
       // ...defaultTheme.screens,
       // => @media (max-width: 639px) { ... }
     },
