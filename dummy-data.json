@@ -1,4 +1,54 @@
 {
     "category": [{"id": 0, "label": "cat", "value": "cat"}],
-    "music-names": [{"id": 0, "name": "x"}]
+    "music-names": [{"id": 0, "name": "x"}],
+    "musics" : [
+        {
+            "id": 1,
+        "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3",
+        "demo": "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3",
+        "title": "Vasiat2",
+        "cover": "https://songha.ir/wp-content/uploads/2020/09/naaji-vasiat-2.jpg",
+        "duration": 325,
+        "artists": [
+                { "id": 1, "name": "Pishro" },
+                { "id": 2, "name": "021kid" }
+            ]
+        },
+        {
+            "id": 2,
+        "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+        "title": "Toska",
+        "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+        "demo": "https://file.songha.ir/A/Amorf/arabic.slowed/%C3%A7%C3%B6l%20%28slowed%29%20-%20Amorf%20%28128%29.mp3",
+        "duration": 125,
+        "artists": [
+                { "id": 1, "name": "Pishro" },
+                { "id": 2, "name": "021kid" }
+            ]
+        },
+        {
+            "id": 3,
+        "src": "https://file.songha.ir/N/Naaji/Single/Naji%20-%20Sokoot%20Talkh%20[128].songha.ir.mp3",
+        "demo": "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3",
+        "title": "Sokut",
+        "duration": 425,
+        "cover": "https://songha.ir/wp-content/uploads/2022/04/naji-2.jpg",
+        "artists": [
+                { "id": 1, "name": "Pishro" },
+                { "id": 2, "name": "021kid" }
+            ]
+        },
+        {
+            "id": 1,
+        "src": "https://songha.ir/naji-irane-kochik/",
+        "demo": "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3",
+        "title": "Iran Kuchak",
+        "duration": 85,
+        "cover": "https://songha.ir/naji-irane-kochik/",
+        "artists": [
+                { "id": 1, "name": "Pishro" },
+                { "id": 2, "name": "021kid" }
+            ]
+        }
+    ]
 }

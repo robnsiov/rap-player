@@ -7,7 +7,6 @@ const Scrollbar = dynamic(() => import("react-custom-scrollbars-2"), {
   ssr: false,
 });
 const Scroll = ({ children }: ScrollImpl) => {
-  console.log(1);
   return (
     <>
       <Scrollbar

@@ -12,15 +12,28 @@ import { TbMusic } from "react-icons/tb";
 import ShadowBorder from "../../UI/borders/shadow-border";
 import MusicContainer from "../../share/music-container/music-container";
 import MusicHeader from "../../share/music-header/music-header";
+import Player from "./player/player";
 
 const Music = () => {
-  const { showBackdrop, toggleBackdrop } = useMusic();
+  const { showBackdrop, toggleBackdrop, showMusicPage, mdSize, hidePageMusic } =
+    useMusic();
   const [like, setLike] = useState(false);
   return (
     <>
-      <MusicContainer className="mr-4 md:hidden">
+      {/* <MusicContainer className="mr-4 md:absolute md:left-2 md:w-[calc(100%-17px)] md:h-[calc(100%-17px)] md:top-2  md:z-[500] md:mr-0"> */}
+      <MusicContainer
+        className={`duration-200 opacity-100 visible transition-all mr-4 md:absolute 
+      md:left-2 md:w-[calc(100%-17px)] md:h-[calc(100%-17px)] md:top-2  
+      md:z-[500] md:invisible md:opacity-0 md:mr-0 ${
+        mdSize ? "md:opacity-0 md:invisible" : ""
+      } ${showMusicPage ? "show-music-page" : ""}`}
+      >
         <MusicHeader>
-          <FiChevronDown className="text-xl cursor-pointer" />
+          <FiChevronDown
+            className="text-xl cursor-pointer md:inline-block hidden"
+            onClick={hidePageMusic}
+          />
+          <span className=" md:hidden"></span>
           <span className="font-medium">Now Playing</span>
           <TbMusic className="text-xl cursor-pointer" />
         </MusicHeader>
@@ -28,11 +41,10 @@ const Music = () => {
           src={landing}
           toggleBackdrop={toggleBackdrop}
           showBackdrop={showBackdrop}
-          
         />
         <div
           onClick={toggleBackdrop}
-          className="w-[280px] h-[280px] relative cursor-pointer"
+          className="w-[280px] h-[280px] 340px:w-full 340px:height-unset 340px:aspect-square relative cursor-pointer"
         >
           <span className="absolute inset-0 z-30 bg-one-dark-100"></span>
           <div className="absolute inset-0 z-20">
@@ -72,6 +84,7 @@ const Music = () => {
             Mr.Kiti Mr.Kiti Mr.Kiti Mr.Kiti Mr.Kiti
           </h5>
         </div>
+        <Player />
         <div className="text-white absolute bottom-0 right-0 left-0 py-4 px-6 flex justify-between items-center rounded-xl rounded-t-none">
           <div
             className={

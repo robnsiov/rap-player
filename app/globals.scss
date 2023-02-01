@@ -17,6 +17,13 @@
   .break-word {
     word-break: break-word;
   }
+  .show-music-page {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .height-unset {
+    height: unset;
+  }
 }
 
 @layer components {
