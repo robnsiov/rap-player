@@ -31,7 +31,9 @@ const MusicBackdrop = ({
               src={src}
               alt="music-cover"
               priority
-              className="h-full w-full object-cover object-top rounded-2xl"
+              width={280}
+              height={280}
+              className="object-cover object-top rounded-2xl"
             />
           </div>
         </FadeScaleAnimation>

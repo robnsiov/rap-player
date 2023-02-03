@@ -54,17 +54,22 @@ const Musics = () => {
           <span className="absolute -top-4 right-0 left-0 h-6 bg-gradient-to-t from-transparent via-one-dark to-one-dark  rounded-t-none z-30"></span>
           <Scroll>
             <div className="w-full flex items-center justify-start flex-col relative">
-              {musics.map(({ title, artists, duration, demo }, i) => (
-                <Fragment key={i}>
-                  <SingleMusic
-                    title={title}
-                    index={i}
-                    artists={artists}
-                    duration={duration}
-                    demo={demo}
-                  />
-                </Fragment>
-              ))}
+              {musics.map(
+                ({ title, artists, duration, demo, cover, id, src }, i) => (
+                  <Fragment key={i}>
+                    <SingleMusic
+                      title={title}
+                      index={i}
+                      artists={artists}
+                      duration={duration}
+                      demo={demo}
+                      cover={cover}
+                      src={src}
+                      id={id}
+                    />
+                  </Fragment>
+                )
+              )}
             </div>
           </Scroll>
         </div>

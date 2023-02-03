@@ -1,37 +1,94 @@
 "use client";
-
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import {
-  BsPauseCircleFill,
-  BsPlayCircle,
-  BsPlayCircleFill,
-} from "react-icons/bs";
+import { BsPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
 import { HiFastForward, HiRewind } from "react-icons/hi";
-import { GiPreviousButton, GiNextButton } from "react-icons/gi";
+import { GiPreviousButton } from "react-icons/gi";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
-import { MdOutlineShuffle, MdOutlineShuffleOn } from "react-icons/md";
-const Player = () => {
+import { TbRepeat, TbRepeatOnce } from "react-icons/tb";
+import BtnWrapper from "./btn-wrapper/btn-wrapper";
+import PlayerImpl from "./types";
+import usePlayer from "./use-player";
+const Player = ({ src }: PlayerImpl) => {
+  const {
+    nextTrack,
+    prevTrack,
+    playerRef,
+    onListenPlayer,
+    onPause,
+    onPlay,
+    clearDemo,
+  } = usePlayer();
+
   return (
     <>
       <AudioPlayer
-        // autoPlay
-        src="https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3"
-        onPlay={(e) => console.log("onPlay")}
+        ref={playerRef}
+        src={src}
         showSkipControls={true}
-        className="bg-transparent text-white"
-        style={{ background: "transparent", color: "#fff" }}
+        onClickNext={nextTrack}
+        onPlay={onPlay}
+        onPause={onPause}
+        onListen={onListenPlayer}
+        onClickPrevious={prevTrack}
+        className="bg-transparent text-white shadow-none p-0"
+        style={{
+          background: "transparent",
+          color: "#fff",
+          boxShadow: "none",
+          padding: "0",
+        }}
         customIcons={{
-          play: <BsPlayCircleFill className="text-white" />,
-          pause: <BsPauseCircleFill className="text-white" />,
-          rewind: <HiRewind className="text-white text-[26px]" />,
-          forward: <HiFastForward className="text-white text-[26px]" />,
-          previous: <GiPreviousButton className="text-white text-[20px]" />,
-          next: <GiPreviousButton className="text-white text-[20px]" />,
-          volume: <HiVolumeUp className="text-white text-[20px]" />,
-          volumeMute: <HiVolumeOff className="text-white text-[20px]" />,
-          loop: <MdOutlineShuffleOn className="text-white text-[20px]" />,
-          loopOff: <MdOutlineShuffle className="text-white text-[20px]" />,
+          play: (
+            <BtnWrapper>
+              <BsPlayCircleFill onClick={clearDemo} className="text-white" />
+            </BtnWrapper>
+          ),
+          pause: (
+            <BtnWrapper>
+              <BsPauseCircleFill className="text-white" />
+            </BtnWrapper>
+          ),
+          rewind: (
+            <BtnWrapper>
+              <HiRewind className="text-white text-[26px]" />
+            </BtnWrapper>
+          ),
+          forward: (
+            <BtnWrapper>
+              <HiFastForward className="text-white text-[26px]" />
+            </BtnWrapper>
+          ),
+          previous: (
+            <BtnWrapper>
+              <GiPreviousButton className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
+          next: (
+            <BtnWrapper>
+              <GiPreviousButton className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
+          volume: (
+            <BtnWrapper>
+              <HiVolumeUp className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
+          volumeMute: (
+            <BtnWrapper>
+              <HiVolumeOff className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
+          loop: (
+            <BtnWrapper>
+              <TbRepeat className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
+          loopOff: (
+            <BtnWrapper>
+              <TbRepeatOnce className="text-white text-[20px]" />
+            </BtnWrapper>
+          ),
         }}
 
         // other props here

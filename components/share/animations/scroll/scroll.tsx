@@ -12,8 +12,10 @@ const Scroll = ({ children }: ScrollImpl) => {
       <Scrollbar
         style={{ width: "100%", height: "100%" }}
         autoHide={true}
-        renderTrackVertical={() => (
-          <span className="w-[2px] h-full bg-gray-800 absolute right-0 top-0 rounded-lg z-[10]"></span>
+        // autoHideDuration={200}
+        autoHideTimeout={200}
+        renderThumbVertical={() => (
+          <span className="duration-200 transition-opacity w-[3px] h-full bg-gray-800 absolute right-0 top-0 rounded-lg z-[10]"></span>
         )}
       >
         {children}

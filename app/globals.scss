@@ -26,6 +26,54 @@
   }
 }
 
+.rhap_button-clear {
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: unset !important;
+  &.rhap_main-controls-button {
+    margin-left: 10px !important;
+  }
+}
+.rhap_current-time,
+.rhap_total-time {
+  color: #fff !important;
+  font-size: 14px !important;
+}
+.rhap_current-time {
+  margin-right: 5px !important;
+}
+.rhap_progress-indicator {
+  background-color: #fff !important;
+  width: 16px !important;
+  height: 16px !important;
+  top: -6px !important;
+}
+.rhap_progress-container {
+  height: 16px !important;
+}
+.rhap_progress-bar,
+.rhap_progress-filled,
+.rhap_download-progress {
+  height: 3px !important;
+  border-radius: 4px !important;
+}
+.rhap_progress-filled {
+  background-color: #fff !important;
+}
+.rhap_progress-bar {
+  background-color: #242932 !important;
+}
+.rhap_download-progress {
+  background-color: #393f4b !important;
+}
+.rhap_volume-controls {
+  display: none !important;
+}
+.rhap_controls-section{
+  margin-top: 20px !important;
+}
 @layer components {
   .center-absolute {
     @apply left-1/2 -translate-x-1/2;

@@ -3,5 +3,8 @@ export default interface SingleMusicImpl {
   title: string;
   artists: Array<{ name: string; id: number }>;
   duration: number;
-  demo: string;
+  cover: string;
+  src: string;
+  demo?: string;
+  id: number;
 }

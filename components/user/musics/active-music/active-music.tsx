@@ -7,47 +7,71 @@ import {
   BsPlayCircle,
   BsPlayCircleFill,
 } from "react-icons/bs";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import useActiveMusic from "./use-active-music";
+import FadeAnimation from "../../../share/animations/fade/fade-animation";
 const ActiveMusic = () => {
-  const [like, setLike] = useState(false);
-  const { showMusicPage } = useActiveMusic();
+  const {
+    showMusicPage,
+    artists,
+    cover,
+    id,
+    title,
+    showActiveMusic,
+    played,
+    togglePlayePauseMusic,
+  } = useActiveMusic();
   return (
     <>
-      <div
-        className="cursor-pointer absolute bottom-2 right-2 left-2 z-[200] hidden
-         items-center justify-between p-1.5 rounded-xl bg-one-dark-200 border-2 md:flex"
+      <FadeAnimation
+        inProp={showActiveMusic}
+        className="absolute bottom-2 right-2 left-2 z-[200]"
       >
         <div
-          className="flex justify-start items-center w-full"
-          onClick={showMusicPage}
+          className="cursor-pointer  hidden w-full
+         items-center justify-between p-1.5 rounded-xl bg-one-dark-200 border-2 md:flex"
         >
-          <div className="w-[40px] h-[40px] rounded-xl overflow-hidden mr-3">
-            <Image
-              src={image}
-              className="object-cover object-center w-full h-full"
-              alt="image"
+          <div
+            className="flex justify-start items-center w-full"
+            onClick={showMusicPage}
+          >
+            <div className="w-[40px] h-[40px] rounded-xl overflow-hidden mr-3">
+              <Image
+                src={cover}
+                className="object-cover object-center w-full h-full"
+                width={40}
+                height={40}
+                alt={title}
+              />
+            </div>
+            <div className="flex justify-center items-start flex-col">
+              <span className="text-white text-sm max-w-[140px] truncate">
+                {title}
+              </span>
+              <span className="text-[12px] text-gray-400 max-w-[140px] truncate">
+                {artists.map(({ id, name }, index) => (
+                  <Fragment key={id}>
+                    {name} {index !== artists.length - 1 && <>X</>}{" "}
+                  </Fragment>
+                ))}
+              </span>
+            </div>
+          </div>
+          <div className="flex justify-center items-center text-white">
+            <RiHeart2Fill className="mr-2" />
+            <HeartAnimation
+              onClick={togglePlayePauseMusic}
+              first={
+                <BsPlayCircleFill className="text-4xl w-[30px] h-[30px]" />
+              }
+              next={
+                <BsPauseCircleFill className="text-4xl w-[30px] h-[30px]" />
+              }
+              show={played ? "next" : "first"}
             />
           </div>
-          <div className="flex justify-center items-start flex-col">
-            <span className="text-white text-sm max-w-[140px] truncate">
-              Zakhm2 Zakhm2 Zakhm2
-            </span>
-            <span className="text-[12px] text-gray-400 max-w-[140px] truncate">
-              Pishro
-            </span>
-          </div>
         </div>
-        <div className="flex justify-center items-center text-white">
-          <RiHeart2Fill className="mr-2" />
-          <HeartAnimation
-            onClick={() => setLike((prev) => !prev)}
-            first={<BsPlayCircleFill className="text-4xl w-[30px] h-[30px]" />}
-            next={<BsPauseCircleFill className="text-4xl w-[30px] h-[30px]" />}
-            show={like ? "next" : "first"}
-          />
-        </div>
-      </div>
+      </FadeAnimation>
     </>
   );
 };

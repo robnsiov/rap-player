@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useMusicPageStore from "../../../store/music-page-store";
+import useSingleMusicStore from "../../../store/single-music-store";
 
 const useMusic = () => {
   const [showBackdrop, setShowBackdrop] = useState(false);
@@ -7,6 +8,14 @@ const useMusic = () => {
   const [showMusicPage, onChange] = useMusicPageStore((state) => [
     state.show,
     state.onChange,
+  ]);
+  const [artists, title, cover, id, index, src] = useSingleMusicStore((state) => [
+    state.artists,
+    state.title,
+    state.cover,
+    state.id,
+    state.index,
+    state.src,
   ]);
 
   const updateMdSize = (size: number) => {
@@ -23,10 +32,7 @@ const useMusic = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(mdSize);
-  }, [mdSize]);
-
+  
   const toggleBackdrop = () => {
     setShowBackdrop((prev) => !prev);
   };
@@ -35,6 +41,18 @@ const useMusic = () => {
     onChange(false);
   };
 
-  return { toggleBackdrop, showBackdrop, showMusicPage, mdSize, hidePageMusic };
+  return {
+    toggleBackdrop,
+    showBackdrop,
+    showMusicPage,
+    mdSize,
+    hidePageMusic,
+    artists,
+    cover,
+    title,
+    id,
+    index,
+    src
+  };
 };
 export default useMusic;

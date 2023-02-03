@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import fetchRequest from "../utils/fetch-request/fetch-request";
 
-interface MusicImpl {
+export interface MusicImpl {
   id: number;
   src: string;
   title: string;
   cover: string;
   artists: Array<{ name: string; id: number }>;
   duration: number;
-  demo: string;
+  demo?: string;
 }
 
 interface MusicsImpl {
