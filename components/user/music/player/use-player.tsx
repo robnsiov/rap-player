@@ -1,6 +1,6 @@
 import useMusicsStore from "../../../../store/musics-store";
 import useSingleMusicStore from "../../../../store/single-music-store";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import useCurrentTimeMusicStore from "../../../../store/current-time-music-store";
 import useCurrentStatusMusicStore from "../../../../store/current-status-music-store";
@@ -23,8 +23,19 @@ const usePlayer = () => {
     state.demo,
     state.setDemo,
   ]);
+  const [volume, setVolume] = useState([0.5]);
 
   const playerRef = useRef<AudioPlayer>(null);
+
+  useEffect(() => {
+    if (played) playerRef.current?.audio.current?.play();
+    else playerRef.current?.audio.current?.pause();
+  }, [played]);
+
+  const changeVolume = (volume: Array<number>) => {
+    console.log(volume);
+    setVolume(volume);
+  };
 
   const clearDemo = () => {
     if (demo.length !== 0) {
@@ -32,10 +43,6 @@ const usePlayer = () => {
       setDemo({ title: "", demo: "" });
     }
   };
-  useEffect(() => {
-    if (played) playerRef.current?.audio.current?.play();
-    else playerRef.current?.audio.current?.pause();
-  }, [played]);
 
   const onPlay = () => {
     // clearDemo();
@@ -84,6 +91,8 @@ const usePlayer = () => {
     onPause,
     onPlay,
     clearDemo,
+    changeVolume,
+    volume,
   };
 };
 export default usePlayer;

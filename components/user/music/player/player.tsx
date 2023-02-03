@@ -1,5 +1,5 @@
 "use client";
-import AudioPlayer from "react-h5-audio-player";
+import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { BsPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
 import { HiFastForward, HiRewind } from "react-icons/hi";
@@ -9,6 +9,8 @@ import { TbRepeat, TbRepeatOnce } from "react-icons/tb";
 import BtnWrapper from "./btn-wrapper/btn-wrapper";
 import PlayerImpl from "./types";
 import usePlayer from "./use-player";
+import RangeSlider from "../../../share/range-slider/range-slider";
+import { TiVolumeUp, TiVolumeDown, TiVolumeMute } from "react-icons/ti";
 const Player = ({ src }: PlayerImpl) => {
   const {
     nextTrack,
@@ -18,6 +20,8 @@ const Player = ({ src }: PlayerImpl) => {
     onPause,
     onPlay,
     clearDemo,
+    volume,
+    changeVolume,
   } = usePlayer();
 
   return (
@@ -41,12 +45,15 @@ const Player = ({ src }: PlayerImpl) => {
         customIcons={{
           play: (
             <BtnWrapper>
-              <BsPlayCircleFill onClick={clearDemo} className="text-white" />
+              <BsPlayCircleFill
+                onClick={clearDemo}
+                className="text-white text-[55px]"
+              />
             </BtnWrapper>
           ),
           pause: (
             <BtnWrapper>
-              <BsPauseCircleFill className="text-white" />
+              <BsPauseCircleFill className="text-white text-[55px]" />
             </BtnWrapper>
           ),
           rewind: (
@@ -90,8 +97,21 @@ const Player = ({ src }: PlayerImpl) => {
             </BtnWrapper>
           ),
         }}
-
-        // other props here
+        customAdditionalControls={[
+          RHAP_UI.LOOP,
+          <div key={"1"} className="flex justify-center items-center flex-col">
+            <RangeSlider
+              values={volume}
+              onChange={changeVolume}
+              min={0.1}
+              max={1}
+            />
+            <BtnWrapper>
+              <TiVolumeUp className="text-white text-2xl" />
+            </BtnWrapper>
+            <div className="flex justify-center items-center"></div>
+          </div>,
+        ]}
       />
     </>
   );
