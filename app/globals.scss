@@ -33,8 +33,13 @@
   justify-content: center !important;
   width: unset !important;
   &.rhap_main-controls-button {
-    margin-left: 10px !important;
+    width: 100% !important;
   }
+}
+.rhap_main-controls {
+  width: 100% !important;
+  flex: unset !important;
+  justify-content: space-between !important;
 }
 .rhap_current-time,
 .rhap_total-time {
@@ -68,12 +73,15 @@
 .rhap_download-progress {
   background-color: #393f4b !important;
 }
-.rhap_volume-controls {
-  display: none !important;
+
+.rhap_controls-section {
+  margin-top: 25px !important;
 }
-.rhap_controls-section{
-  margin-top: 20px !important;
+.rhap_volume-controls,
+.rhap_additional-controls {
+  flex: unset !important;
 }
+
 @layer components {
   .center-absolute {
     @apply left-1/2 -translate-x-1/2;

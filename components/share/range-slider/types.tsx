@@ -12,3 +12,4 @@ export default interface RangeSliderImpl {
   colors?: Array<string>;
   direction?: Direction;
 }
+export type VolumeRefImpl = HTMLDivElement ;

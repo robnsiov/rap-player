@@ -5,13 +5,12 @@ import { RiHeart2Line, RiHeart2Fill } from "react-icons/ri";
 import { Fragment, useState } from "react";
 import HeartAnimation from "../../share/animations/heart/heart-animation";
 import MusicBackdrop from "./music-backdrop/music-backdrop";
-import { HiHome, HiOutlineHome } from "react-icons/hi";
 import { FiChevronDown } from "react-icons/fi";
 import { TbMusic } from "react-icons/tb";
-import ShadowBorder from "../../UI/borders/shadow-border";
 import MusicContainer from "../../share/music-container/music-container";
 import MusicHeader from "../../share/music-header/music-header";
 import Player from "./player/player";
+import MusicFooter from "./music-footer/music-footer";
 
 const Music = () => {
   const {
@@ -65,17 +64,17 @@ const Music = () => {
                 priority
                 width={280}
                 height={280}
-                className="object-cover object-top rounded-2xl"
+                className="object-cover border-2 border-one-dark-500 object-top rounded-2xl"
               />
             </div>
-            <div className="absolute inset-y-0 inset-x-4 translate-y-12 z-10 flex justify-center items-center">
+            <div className="absolute  inset-y-0  inset-x-4 translate-y-12 z-10 flex justify-center items-center">
               <Image
                 src={cover}
                 alt="music-cover"
                 priority
                 width={280}
                 height={280}
-                className="object-cover object-top rounded-2xl blur-2xl"
+                className="object-cover  object-top rounded-2xl blur-2xl"
               />
             </div>
           </div>
@@ -104,40 +103,11 @@ const Music = () => {
             </h5>
           </div>
         </div>
-        <div className="w-full  flex justify-center items-center mb-16">
+        <div className="w-full  flex justify-center items-center mb-[70px]">
           <Player src={src} />
         </div>
 
-        <div className="text-white absolute bottom-0 right-0 left-0 py-4 px-4 flex justify-between items-center rounded-xl rounded-t-none">
-          <div
-            className={
-              "group flex items-center text-center flex-col justify-center relative"
-            }
-          >
-            <span
-              className={`absolute w-4 h-4 bg-white blur-xl z-10 transition-all duration-200   ${
-                like ? "opacity-100" : "opacity-0"
-              } group-hover:opacity-100`}
-            ></span>
-            <div className="relative z-20">
-              <HeartAnimation
-                onClick={() => setLike((prev) => !prev)}
-                first={
-                  <HiOutlineHome className="text-2xl cursor-pointer text-gray-400" />
-                }
-                next={<HiHome className="text-2xl cursor-pointer" />}
-                show={like ? "next" : "first"}
-              />
-            </div>
-            <span
-              className={`text-[8px] relative z-20 duration-200 transition-all mt-1 ${
-                like ? "text-white" : "text-gray-400"
-              }`}
-            >
-              Home
-            </span>
-          </div>
-        </div>
+        <MusicFooter />
       </MusicContainer>
     </>
   );
