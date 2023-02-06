@@ -1,0 +1,8 @@
+export default interface TextInputImpl {
+  type?: string;
+  label: string;
+  placeholder?: string;
+  error?: string | undefined;
+  touched?: boolean;
+  name: string;
+}

@@ -6,7 +6,7 @@ interface MusicPageImpl {
 }
 
 const useMusicPageStore = create<MusicPageImpl>((set) => ({
-  show: !false,
+  show: false,
   onChange(status: boolean) {
     set({ show: status });
   },

@@ -22,7 +22,6 @@ const useMusicsStore = create<MusicsImpl>((set) => ({
     const { data, isError } = await fetchRequest<Array<MusicImpl>>({
       url: "/musics",
     });
-    console.log(data.result);
     set({ musics: isError ? [] : data.result });
   },
 }));

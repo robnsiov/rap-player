@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useMusicPageStore from "../../../store/music-page-store";
 import useSingleMusicStore from "../../../store/single-music-store";
+import { useCopyToClipboard } from "usehooks-ts";
 
 const useMusic = () => {
   const [showBackdrop, setShowBackdrop] = useState(false);
@@ -9,14 +10,34 @@ const useMusic = () => {
     state.show,
     state.onChange,
   ]);
-  const [artists, title, cover, id, index, src] = useSingleMusicStore((state) => [
-    state.artists,
-    state.title,
-    state.cover,
-    state.id,
-    state.index,
-    state.src,
-  ]);
+  const [artists, title, cover, id, index, src] = useSingleMusicStore(
+    (state) => [
+      state.artists,
+      state.title,
+      state.cover,
+      state.id,
+      state.index,
+      state.src,
+    ]
+  );
+  const [showCopyMessage, setShowCopyMessage] = useState(false);
+  const [_, copyTo] = useCopyToClipboard();
+
+  const copyToClipBoard = () => {
+    copyTo(src);
+  };
+
+  const changeCopyMessageShowing = (show: boolean) => {
+    copyToClipBoard();
+    setShowCopyMessage(show);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      changeCopyMessageShowing(false);
+    }, 1600);
+    return () => clearTimeout(timer);
+  }, [showCopyMessage]);
 
   const updateMdSize = (size: number) => {
     setMdSize(size <= 767 || false);
@@ -32,7 +53,6 @@ const useMusic = () => {
     };
   }, []);
 
-  
   const toggleBackdrop = () => {
     setShowBackdrop((prev) => !prev);
   };
@@ -52,7 +72,9 @@ const useMusic = () => {
     title,
     id,
     index,
-    src
+    src,
+    showCopyMessage,
+    changeCopyMessageShowing,
   };
 };
 export default useMusic;

@@ -17,9 +17,12 @@ const useDemoMusic = () => {
   const [index] = useSingleMusicStore((state) => [state.index]);
 
   useEffect(() => {
+    
     audio.addEventListener("ended", () => {
       setDemo({ title: "", demo: "" });
     });
+
+
   }, []);
 
   const clearDemo = () => {

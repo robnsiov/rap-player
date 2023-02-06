@@ -1,10 +1,12 @@
-import useMusicsStore from "../../../../store/musics-store";
+import useMusicsStore, { MusicImpl } from "../../../../store/musics-store";
 import useSingleMusicStore from "../../../../store/single-music-store";
 import { useRef, useEffect, useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import useCurrentTimeMusicStore from "../../../../store/current-time-music-store";
 import useCurrentStatusMusicStore from "../../../../store/current-status-music-store";
 import useMusicDemoStore from "../../../../store/music-demo-store";
+import useActivePlaylistStore from "../../../../store/active-playlist";
+import useTopMusicsStore from "../../../../store/top-musics-store";
 
 const usePlayer = () => {
   const [index, singleMusicChange] = useSingleMusicStore((state) => [
@@ -23,7 +25,10 @@ const usePlayer = () => {
     state.demo,
     state.setDemo,
   ]);
-  const [volume, setVolume] = useState([0.5]);
+  const [volume, setVolume] = useState([0.8]);
+
+  const [playlistType] = useActivePlaylistStore((state) => [state.playlist]);
+  const [topMusics] = useTopMusicsStore((state) => [state.musics]);
 
   const playerRef = useRef<AudioPlayer>(null);
 
@@ -32,8 +37,13 @@ const usePlayer = () => {
     else playerRef.current?.audio.current?.pause();
   }, [played]);
 
+  useEffect(() => {
+    const audio: HTMLAudioElement = playerRef?.current?.audio
+      .current as HTMLAudioElement;
+    audio.volume = volume[0];
+  }, [volume]);
+
   const changeVolume = (volume: Array<number>) => {
-    console.log(volume);
     setVolume(volume);
   };
 
@@ -63,13 +73,38 @@ const usePlayer = () => {
   };
 
   const findMusicAndSet = (index: number) => {
-    const music = musics[index];
+    console.log(index);
+    let music: MusicImpl;
+    switch (playlistType) {
+      case "main-musics":
+        music = musics[index];
+        break;
+      case "top-musics":
+        music = topMusics[index];
+        break;
+      default:
+        music = musics[index];
+        break;
+    }
     singleMusicChange({ ...music, index });
   };
   const nextTrack = () => {
     clearDemo();
     let nextIndex = index + 1;
-    if (index > musics.length - 1) {
+    let playlist: Array<MusicImpl>;
+    switch (playlistType) {
+      case "main-musics":
+        playlist = musics;
+        break;
+      case "top-musics":
+        playlist = topMusics;
+        break;
+      default:
+        playlist = musics;
+        break;
+    }
+
+    if (index >= playlist.length - 1) {
       nextIndex = 0;
     }
     findMusicAndSet(nextIndex);
@@ -77,10 +112,27 @@ const usePlayer = () => {
   const prevTrack = () => {
     clearDemo();
     let prevIndex = index - 1;
+    let playlist: Array<MusicImpl>;
+    switch (playlistType) {
+      case "main-musics":
+        playlist = musics;
+        break;
+      case "top-musics":
+        playlist = topMusics;
+        break;
+      default:
+        playlist = musics;
+        break;
+    }
     if (index <= 0) {
-      prevIndex = musics.length - 1;
+      prevIndex = playlist.length - 1;
     }
     findMusicAndSet(prevIndex);
+  };
+
+  const onEndedMusic = () => {
+    const loop = playerRef.current?.audio.current?.loop;
+    if (!loop) nextTrack();
   };
 
   return {
@@ -93,6 +145,7 @@ const usePlayer = () => {
     clearDemo,
     changeVolume,
     volume,
+    onEndedMusic,
   };
 };
 export default usePlayer;

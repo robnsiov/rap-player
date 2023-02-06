@@ -1,3 +1,4 @@
+import useActivePlaylistStore from "../../../../store/active-playlist";
 import useCurrentStatusMusicStore from "../../../../store/current-status-music-store";
 import useCurrentTimeMusicStore from "../../../../store/current-time-music-store";
 import useMusicDemoStore from "../../../../store/music-demo-store";
@@ -21,18 +22,27 @@ const useSingleMusic = () => {
     state.percentElapsedTime,
   ]);
 
-  const [onChangeCurrentStatusMusic, played] = useCurrentStatusMusicStore((state) => [
+  const [onChangeCurrentStatusMusic, played] = useCurrentStatusMusicStore(
+    (state) => [state.onChange, state.played]
+  );
+
+  const [onChangePlaylist] = useActivePlaylistStore((state) => [
     state.onChange,
-    state.played,
   ]);
+
+  const setMainMusicsToActivePlayer = () => {
+    onChangePlaylist("main-musics");
+  };
 
   const setDemoData = ({ title, demo }: { title: string; demo: string }) => {
     if (singleMusicIndex !== -1) onChangeCurrentStatusMusic({ played: false });
     setDemo({ title, demo });
   };
   const setMusicToPlay = (music: SingleMusic) => {
+    setMainMusicsToActivePlayer();
     if (demo.length !== 0) setDemo({ title: "", demo: "" });
     singleMusicOnchange(music);
+    onChangeCurrentStatusMusic({ played: true });
     // onChangeMusicPageStatus(true);
   };
   return {

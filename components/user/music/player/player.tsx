@@ -21,6 +21,7 @@ const Player = ({ src }: PlayerImpl) => {
     clearDemo,
     volume,
     changeVolume,
+    onEndedMusic,
   } = usePlayer();
 
   return (
@@ -31,6 +32,7 @@ const Player = ({ src }: PlayerImpl) => {
         showSkipControls={true}
         onClickNext={nextTrack}
         onPlay={onPlay}
+        onEnded={onEndedMusic}
         onPause={onPause}
         onListen={onListenPlayer}
         onClickPrevious={prevTrack}

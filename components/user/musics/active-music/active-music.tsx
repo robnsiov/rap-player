@@ -25,7 +25,7 @@ const ActiveMusic = () => {
     <>
       <FadeAnimation
         inProp={showActiveMusic}
-        className="absolute bottom-2 right-2 left-2 z-[200]"
+        className="absolute bottom-2 right-2 left-2 z-[180]"
       >
         <div
           className="cursor-pointer  hidden w-full

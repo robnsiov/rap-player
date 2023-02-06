@@ -1,6 +1,5 @@
 import Image from "next/image";
 import useMusic from "./use-music";
-import { CgMore } from "react-icons/cg";
 import { RiHeart2Line, RiHeart2Fill } from "react-icons/ri";
 import { Fragment, useState } from "react";
 import HeartAnimation from "../../share/animations/heart/heart-animation";
@@ -11,6 +10,8 @@ import MusicContainer from "../../share/music-container/music-container";
 import MusicHeader from "../../share/music-header/music-header";
 import Player from "./player/player";
 import MusicFooter from "./music-footer/music-footer";
+import { HiLink } from "react-icons/hi";
+import FadeAnimation from "../../share/animations/fade/fade-animation";
 
 const Music = () => {
   const {
@@ -25,8 +26,11 @@ const Music = () => {
     index,
     title,
     src,
+    showCopyMessage,
+    changeCopyMessageShowing,
   } = useMusic();
   const [like, setLike] = useState(false);
+  if (id === -1) return null;
   return (
     <>
       {/* <MusicContainer className="mr-4 md:absolute md:left-2 md:w-[calc(100%-17px)] md:h-[calc(100%-17px)] md:top-2  md:z-[500] md:mr-0"> */}
@@ -91,9 +95,12 @@ const Music = () => {
             <h3 className="text-white text-2xl font-semibold w-[150px] truncate text-center">
               {title}
             </h3>
-            <CgMore className="text-xl cursor-pointer text-gray-400" />
+            <HiLink
+              onClick={() => changeCopyMessageShowing(true)}
+              className="text-xl cursor-pointer text-gray-400"
+            />
           </div>
-          <div className="w-[180px] text-center mt-2 mb-5">
+          <div className="w-[180px] text-center mt-2 mb-5 relative">
             <h5 className="text-gray-400 truncate">
               {artists.map(({ id, name }, index) => (
                 <Fragment key={id}>
@@ -102,12 +109,20 @@ const Music = () => {
               ))}
             </h5>
           </div>
+          <FadeAnimation
+            inProp={showCopyMessage}
+            className="absolute w-full  top-3.5 center-absolute"
+          >
+            <div className="absolute top-0 center-absolute py-1 bg-one-dark-400 px-2 flex text-xs text-white border-2 border-one-dark-500 rounded-xl justify-center items-center">
+              <span className="whitespace-nowrap">The link was copied</span>
+            </div>
+          </FadeAnimation>
         </div>
         <div className="w-full  flex justify-center items-center mb-[70px]">
           <Player src={src} />
         </div>
 
-        <MusicFooter />
+        <MusicFooter href={src} />
       </MusicContainer>
     </>
   );

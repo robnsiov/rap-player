@@ -86,7 +86,9 @@
   .center-absolute {
     @apply left-1/2 -translate-x-1/2;
   }
-
+  .admin-panel__active-link {
+    @apply bg-gray-700;
+  }
   .fade-enter {
     @apply opacity-0;
   }

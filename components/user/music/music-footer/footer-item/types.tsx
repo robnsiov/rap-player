@@ -4,4 +4,6 @@ export default interface FootetItemImpl {
   title: string;
   onClick?(): void;
   icon: IconType;
+  link?: boolean;
+  href?: string;
 }
