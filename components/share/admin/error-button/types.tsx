@@ -1,4 +1,4 @@
-export default interface ButtonImpl {
+export default interface ErrorButtonImpl {
   onClick?(): void;
   fill?: boolean;
   title: string;

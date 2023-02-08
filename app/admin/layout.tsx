@@ -4,10 +4,11 @@ import ToastContainer from "../../components/admin/toast-container/toast-contain
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <div className="min-h-screen w-full flex justify-start items-start flex-col bg-gray-300/50">
+      <div className="min-h-screen w-full flex justify-start items-start  bg-gray-300/50">
         <ToastContainer />
         <Sidebar />
         {children}
+        
       </div>
     </>
   );

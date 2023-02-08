@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div
         className={`bg-gray-800 overflow-hidden text-gray-200
       flex justify-start items-start flex-col h-screen 
-      border-r-2 border-r-gray-300 ${closeSidebar ? "w-[54px]" : "w-[250px]"}`}
+      border-r-2 border-r-gray-300 ${closeSidebar ? "min-w-[54px]" : "w-[250px]"}`}
       >
         <div className="w-full py-7 px-4 flex justify-end items-center bg-gray-900 md:hidden">
           <div

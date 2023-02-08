@@ -49,7 +49,6 @@ const usePlayer = () => {
 
   const clearDemo = () => {
     if (demo.length !== 0) {
-      console.log(2);
       setDemo({ title: "", demo: "" });
     }
   };
@@ -73,7 +72,6 @@ const usePlayer = () => {
   };
 
   const findMusicAndSet = (index: number) => {
-    console.log(index);
     let music: MusicImpl;
     switch (playlistType) {
       case "main-musics":

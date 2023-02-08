@@ -30,7 +30,6 @@ const useAdminAuth = () => {
   const onSubmitForm = () => {
     // makeToast({ message: "successfuly", type: "success" });
     // router.replace("/");
-    console.log(activityType);
     triggerActivityLoader(activityType);
   };
   return {

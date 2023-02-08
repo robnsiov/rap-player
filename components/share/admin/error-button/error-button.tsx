@@ -1,14 +1,14 @@
-import ButtonImpl from "./types";
 import { Oval } from "react-loading-icons";
-import useButton from "./use-button";
+import useButton from "./use-error-button";
+import ErrorButtonImpl from "./types";
 
-const Button = ({
+const ErrorButton = ({
   onClick = () => {},
   fill = true,
   title,
   loader = false,
   type = "button",
-}: ButtonImpl) => {
+}: ErrorButtonImpl) => {
   const { active, onPointerDown, onPointerUp, clickOnBtn } = useButton({
     onClick,
     loader,
@@ -25,8 +25,8 @@ const Button = ({
         select-none
         border-2 ${
           fill
-            ? "text-white bg-gray-700 border-gray-600 active:bg-transparent active:text-gray-700 hover:bg-gray-600"
-            : "text-gray-700 bg-white border-gray-600 active:bg-gray-700 active:text-white hover:border-gray-600 hover:text-gray-600"
+            ? "text-white bg-red-500 border-red-400 active:bg-transparent active:text-red-400 hover:bg-red-400"
+            : "text-red-400 bg-white border-red-400 active:bg-red-400 active:text-white hover:border-red-400 hover:text-red-500"
         }`}
       >
         {loader ? (
@@ -34,7 +34,7 @@ const Button = ({
             {fill ? (
               <>
                 {active ? (
-                  <Oval stroke="#374151" height={"20px"} width={"20px"} />
+                  <Oval stroke="#ef4444" height={"20px"} width={"20px"} />
                 ) : (
                   <Oval stroke="white" height={"20px"} width={"20px"} />
                 )}
@@ -44,7 +44,7 @@ const Button = ({
                 {active ? (
                   <Oval stroke="#fff" height={"20px"} width={"20px"} />
                 ) : (
-                  <Oval stroke="#374151" height={"20px"} width={"20px"} />
+                  <Oval stroke="#ef4444" height={"20px"} width={"20px"} />
                 )}
               </>
             )}
@@ -56,4 +56,4 @@ const Button = ({
     </>
   );
 };
-export default Button;
+export default ErrorButton;

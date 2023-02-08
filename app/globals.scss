@@ -10,6 +10,19 @@
     height: 100vh;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #5c6980;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #888;
+    }
   }
 }
 
@@ -24,6 +37,12 @@
   .height-unset {
     height: unset;
   }
+}
+
+.ant-table-cell-row-hover {
+  background-color: #2429320f !important;
+  border-radius: unset !important;
+  cursor: pointer;
 }
 
 .rhap_button-clear {

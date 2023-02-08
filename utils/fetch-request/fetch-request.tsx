@@ -8,6 +8,7 @@ interface FetchRequestImpl {
   onNetworkError?(): void;
   onBadRequestError?(): void;
   onSuccess?(): void;
+  onEnd?(): void;
 }
 interface OutputFetchRequest<T> {
   data: { result: T | []; error: {} | null | [] };
@@ -25,6 +26,7 @@ async function fetchRequest<T>({
   onBadRequestError = defaultFtech,
   onNetworkError = defaultFtech,
   onError = defaultFtech,
+  onEnd = defaultFtech,
 }: FetchRequestImpl) {
   const requestOutput: OutputFetchRequest<T> = {
     isError: false,
@@ -52,6 +54,7 @@ async function fetchRequest<T>({
         break;
     }
   } finally {
+    onEnd();
     return requestOutput;
   }
 }

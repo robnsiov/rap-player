@@ -1,6 +1,9 @@
 {
     "category": [{"id": 0, "label": "cat", "value": "cat"}],
     "music-names": [{"id": 0, "name": "x"}],
+    "categories" : [{"id": 1,"title": "cat1" }
+        ,{"id": 2,"title": "cat2" }
+    ],
     "musics" : [
         {
             "id": 1147,
