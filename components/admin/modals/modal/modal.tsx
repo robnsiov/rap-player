@@ -5,7 +5,12 @@ import FadeAnimation from "../../../share/animations/fade/fade-animation";
 import ModalImpl from "./types";
 import useModal from "./use-modal";
 
-const Modal = ({ children, close, open, className = "" }: ModalImpl) => {
+const Modal = ({
+  children,
+  close,
+  open,
+  className = "max-w-2xl",
+}: ModalImpl) => {
   const { modalZIndex, closeModal, ref, showInnerContent, closeModalByIcon } =
     useModal({
       open,
@@ -32,7 +37,7 @@ const Modal = ({ children, close, open, className = "" }: ModalImpl) => {
            }`}
           >
             <div
-              className={`p-4 bg-white rounded-xl w-full max-w-2xl flex justify-center items-center flex-col ${className}`}
+              className={`p-4 bg-white rounded-xl w-full  flex justify-center items-center flex-col ${className}`}
             >
               <div className="w-full flex justify-end items-center mb-3">
                 <IoMdClose

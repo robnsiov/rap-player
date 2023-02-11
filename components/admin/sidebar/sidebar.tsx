@@ -4,16 +4,21 @@ import Link from "next/link";
 import { MdOutlineWindow } from "react-icons/md";
 import { BiCategoryAlt } from "react-icons/bi";
 import useSidebar from "./use-sidebar";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const { toggleSidebarStatus, closeSidebar } = useSidebar();
+  const pathname = usePathname();
 
+  if (pathname === "/admin/auth") return;
   return (
     <>
       <div
         className={`bg-gray-800 overflow-hidden text-gray-200
       flex justify-start items-start flex-col h-screen 
-      border-r-2 border-r-gray-300 ${closeSidebar ? "min-w-[54px]" : "w-[250px]"}`}
+      border-r-2 border-r-gray-300 ${
+        closeSidebar ? "min-w-[54px]" : "w-[250px]"
+      }`}
       >
         <div className="w-full py-7 px-4 flex justify-end items-center bg-gray-900 md:hidden">
           <div

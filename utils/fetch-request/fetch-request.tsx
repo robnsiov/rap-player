@@ -4,6 +4,7 @@ interface FetchRequestImpl {
   method?: "GET" | "DELETE" | "PUT" | "PATCH" | "POST";
   url: string;
   baseURL?: string;
+  inputData?: any;
   onError?(): void;
   onNetworkError?(): void;
   onBadRequestError?(): void;
@@ -22,6 +23,7 @@ async function fetchRequest<T>({
   method = "GET",
   url,
   baseURL = "http://localhost:5000",
+  inputData = {},
   onSuccess = defaultFtech,
   onBadRequestError = defaultFtech,
   onNetworkError = defaultFtech,
@@ -35,7 +37,12 @@ async function fetchRequest<T>({
   };
 
   try {
-    const { data, status } = await axios({ baseURL, url, method });
+    const { data, status } = await axios({
+      baseURL,
+      url,
+      method,
+      data: inputData,
+    });
     onSuccess();
     requestOutput.data.result = data;
     requestOutput.status = status;

@@ -8,7 +8,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         <ToastContainer />
         <Sidebar />
         {children}
-        
       </div>
     </>
   );

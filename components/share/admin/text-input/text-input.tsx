@@ -12,7 +12,7 @@ const TextInput = ({
   return (
     <>
       <div className="flex justify-center items-start flex-col w-full">
-        <label className="text-gray-500 mb-2 text-[14px] cursor-pointer">
+        <label className="text-gray-500 mb-2 text-[16px] cursor-pointer">
           {label}
         </label>
         <Field

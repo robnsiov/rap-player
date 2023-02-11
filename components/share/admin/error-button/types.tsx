@@ -3,5 +3,4 @@ export default interface ErrorButtonImpl {
   fill?: boolean;
   title: string;
   loader?: boolean;
-  type?: "button" | "submit";
 }

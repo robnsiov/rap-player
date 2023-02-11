@@ -6,21 +6,25 @@ import SkeletonLoadingImpl from "./types";
 
 const SkeletonLoading = ({
   className = "",
-  containerClassName = "w-full h-full flex",
+  containerClassName = "",
+  fadeClassName = "",
   count = 1,
   inProp,
+  baseColor = "#2c313a",
+  highlightColor = "#181d27f2",
 }: SkeletonLoadingImpl) => {
   return (
     <>
       <FadeAnimation
         inProp={inProp}
-        className="w-full h-full rounded-2xl overflow-hidden"
+        className={`w-full h-full overflow-hidden rounded-2xl ${fadeClassName}`}
       >
-        <SkeletonTheme baseColor="#2c313a" highlightColor="#181d27f2">
+        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
           <Skeleton
             count={count}
-            containerClassName={containerClassName}
+            containerClassName={`w-full h-full flex flex-col ${containerClassName}`}
             className={className}
+            inline={true}
           />
         </SkeletonTheme>
       </FadeAnimation>

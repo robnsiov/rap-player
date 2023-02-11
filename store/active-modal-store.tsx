@@ -7,7 +7,7 @@ interface ActiveModalsImpl {
 }
 
 const useActiveModalslStore = create<ActiveModalsImpl>((set, get) => ({
-  zIndex: 99999,
+  zIndex: 999,
   inc() {
     set({ zIndex: get().zIndex + 1 });
   },

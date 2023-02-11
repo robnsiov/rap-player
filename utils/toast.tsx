@@ -9,6 +9,9 @@ const makeToast = ({
   type: "success" | "error" | "loading";
   duration?: number;
 }) => {
-  toast[type](message, { position: "top-right", duration });
+  toast[type](message, {
+    position: "top-right",
+    duration,
+  });
 };
 export default makeToast;

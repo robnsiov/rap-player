@@ -3,4 +3,7 @@ export default interface SkeletonLoadingImpl {
   className?: string;
   containerClassName?: string;
   inProp: boolean;
+  baseColor?: string;
+  highlightColor?: string;
+  fadeClassName?: string;
 }

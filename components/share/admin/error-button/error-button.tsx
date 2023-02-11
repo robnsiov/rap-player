@@ -7,7 +7,6 @@ const ErrorButton = ({
   fill = true,
   title,
   loader = false,
-  type = "button",
 }: ErrorButtonImpl) => {
   const { active, onPointerDown, onPointerUp, clickOnBtn } = useButton({
     onClick,
@@ -15,12 +14,11 @@ const ErrorButton = ({
   });
   return (
     <>
-      <button
+      <span
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onClick={clickOnBtn}
-        type={type}
-        className={`font-semibold w-full rounded-[8px] h-[43.2px]
+        className={`font-semibold cursor-pointer w-full rounded-[8px] h-[43.2px]
         justify-center items-center flex
         select-none
         border-2 ${
@@ -52,7 +50,7 @@ const ErrorButton = ({
         ) : (
           title
         )}
-      </button>
+      </span>
     </>
   );
 };
