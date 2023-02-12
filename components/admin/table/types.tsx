@@ -4,6 +4,8 @@ export default interface TableGridImpl {
   loading: boolean;
   onInsert?(): void;
   onChangePage?(page: number): void;
-  totalPages?: number
-  activePage?: number
+  totalPages?: number;
+  activePage?: number;
+  fetchError?: boolean;
+  tryAgain?(): void;
 }

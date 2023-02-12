@@ -10,7 +10,7 @@ const Sidebar = () => {
   const { toggleSidebarStatus, closeSidebar } = useSidebar();
   const pathname = usePathname();
 
-  if (pathname === "/admin/auth") return;
+  if (pathname === "/admin/auth") return <></>;
   return (
     <>
       <div

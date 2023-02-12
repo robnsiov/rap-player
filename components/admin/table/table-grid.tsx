@@ -2,7 +2,7 @@
 import SkeletonLoading from "../../share/skeleton/skeleton";
 import { VscEmptyWindow } from "react-icons/vsc";
 import { Pagination } from "@mantine/core";
-
+import { Oval } from "react-loading-icons";
 import { Table } from "@mantine/core";
 import TableGridImpl from "./types";
 const TableGrid = ({
@@ -13,10 +13,30 @@ const TableGrid = ({
   onChangePage = () => {},
   totalPages = 0,
   activePage = 0,
+  fetchError = false,
+  tryAgain = () => {},
 }: TableGridImpl) => {
   return (
     <div className="w-full flex justify-center items-end flex-col">
-      <div className="w-full min-h-[531px]">
+      <div className="w-full min-h-[531px] flex justify-start items-start flex-col">
+        {fetchError && (
+          <div className="flex justify-start items-center bg-red-400 text-white border-2 border-red-600 rounded text-sm py-0.5 px-1.5">
+            <span className="mr-2">
+              An error occurred while loading data...
+            </span>
+            {loading ? (
+              <Oval width={16} height={16} />
+            ) : (
+              <span
+                onClick={tryAgain}
+                className="cursor-pointer font-semibold underline"
+              >
+                Try Again?
+              </span>
+            )}
+          </div>
+        )}
+
         <div className="w-full rounded-lg overflow-hidden border-2 border-gray-300 mt-3">
           <Table
             horizontalSpacing="xl"
@@ -34,7 +54,7 @@ const TableGrid = ({
             </thead>
             <tbody>{!loading && rows}</tbody>
           </Table>
-          {loading && (
+          {loading && !fetchError && (
             <div className="w-full flex justify-center items-center">
               <SkeletonLoading
                 baseColor="#2c313a38"
