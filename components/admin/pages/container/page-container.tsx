@@ -14,9 +14,10 @@ import PageContainerImpl from "./types";
 function PageContainer<Values, Value, SelectedRow>({
   defaultSelected,
   clickOnRowManager,
-  schemaValidation,
   columns,
   createRows,
+  Form,
+  onSelectedRow,
 }: PageContainerImpl<Values, Value, SelectedRow>) {
   const {
     rows,
@@ -27,7 +28,6 @@ function PageContainer<Values, Value, SelectedRow>({
     confirmModalOperarion,
     operationsLoading,
     selectedRow,
-    validation,
     formSubmit,
     createNewItem,
     addApiOperation,
@@ -37,9 +37,9 @@ function PageContainer<Values, Value, SelectedRow>({
   } = usePageContainer<Values, Value, SelectedRow>({
     clickOnRowManager,
     defaultSelected,
-    schemaValidation,
     columns,
     createRows,
+    onSelectedRow,
   });
 
   return (
@@ -67,34 +67,20 @@ function PageContainer<Values, Value, SelectedRow>({
         <Modal open={openModal} close={closeModal}>
           <div className="w-full justify-center items-center">
             <AdminTitle title="Category" />
-            <Formik
-              validationSchema={validation}
-              initialValues={selectedRow.defaultForm as any}
-              onSubmit={formSubmit}
-              enableReinitialize={true}
-            >
-              {({ touched, errors }) => (
-                <Form className="w-full">
-                  <div className="mb-3 w-full">
-                    <TextInput
-                      name="title"
-                      label="Title"
-                      placeholder="Enter your category..."
-                      error={errors.title}
-                      touched={touched.title}
-                    />
-                  </div>
-                  <FooterModal
-                    onDelete={() => clickOnFooterBtns("Delete")}
-                    onEdit={() => addApiOperation("Edit")}
-                    deleteLoader={operationsLoading.deleteLoading}
-                    editLoader={operationsLoading.editLoading}
-                    createLoader={operationsLoading.insertLoading}
-                    create={selectedRow.selected.id === -1}
-                  />
-                </Form>
-              )}
-            </Formik>
+            <Form
+              submit={formSubmit}
+              onSelectedRow={onSelectedRow}
+              Footer={
+                <FooterModal
+                  onDelete={() => clickOnFooterBtns("Delete")}
+                  onEdit={() => addApiOperation("Edit")}
+                  deleteLoader={operationsLoading.deleteLoading}
+                  editLoader={operationsLoading.editLoading}
+                  createLoader={operationsLoading.insertLoading}
+                  create={selectedRow.selected.id === -1}
+                />
+              }
+            />
           </div>
         </Modal>
         <ConfirmModals onConfirm={confirmModalOperarion} />

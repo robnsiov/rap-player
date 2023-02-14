@@ -1,8 +1,11 @@
 "use client";
 
+import { Form, Formik } from "formik";
 import { z } from "zod";
+import { toFormikValidationSchema } from "zod-formik-adapter";
+import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
-
+import { useState } from "react";
 interface Category {
   id: number;
   title: string;
@@ -13,10 +16,6 @@ interface SelectedRow {
   selected: Category;
 }
 
-const defaultSelected: SelectedRow = {
-  defaultForm: { title: "" },
-  selected: { id: -1, title: "" },
-};
 const clickOnRowManager = ({ id, title }: Category): SelectedRow => {
   return {
     defaultForm: { title },
@@ -47,14 +46,57 @@ const createRows = ({
 };
 
 const AdminCategory = () => {
+  const [defaultSelected, setDefaultForm] = useState<SelectedRow>({
+    defaultForm: { title: "" },
+    selected: { id: -1, title: "" },
+  });
+  const change = (data: Category) => {
+    setDefaultForm({ ...defaultSelected, defaultForm: data });
+  };
+  const U: React.FC<{
+    Footer: React.ReactNode;
+    submit: (data: Object) => void;
+  }> = ({
+    Footer,
+    submit,
+  }: {
+    Footer: React.ReactNode;
+    submit: (data: Object) => void;
+  }) => {
+    return (
+      <Formik
+        validationSchema={toFormikValidationSchema(schema)}
+        initialValues={defaultSelected.defaultForm}
+        onSubmit={submit}
+        enableReinitialize={true}
+      >
+        {({ touched, errors }) => (
+          <Form className="w-full">
+            <div className="mb-3 w-full">
+              <TextInput
+                name="title"
+                label="Title"
+                placeholder="Enter your category..."
+                error={errors.title}
+                touched={touched.title}
+              />
+            </div>
+            {Footer}
+          </Form>
+        )}
+      </Formik>
+    );
+  };
+
   return (
     <>
       <PageContainer<Categories, Category, SelectedRow>
         defaultSelected={defaultSelected}
         clickOnRowManager={clickOnRowManager}
-        schemaValidation={schema}
         columns={columns}
         createRows={createRows}
+        Form={U}
+        onSelectedRow={change}
       />
     </>
   );

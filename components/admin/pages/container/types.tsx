@@ -1,9 +1,6 @@
-import { z } from "zod";
-
 export default interface PageContainerImpl<Values, Value, SelectedRow> {
-  defaultSelected: SelectedRow;
+  defaultSelected: SelectedRow & { selected: Value };
   clickOnRowManager({}: Value): SelectedRow;
-  schemaValidation: z.ZodObject<any>;
   columns: Array<string>;
   createRows({
     data,
@@ -12,4 +9,10 @@ export default interface PageContainerImpl<Values, Value, SelectedRow> {
     data: Values;
     clickOnRow(data: Value): void;
   }): Array<JSX.Element>;
+  Form: React.FC<{
+    Footer: React.ReactNode;
+    submit: (data: Object) => void;
+    onSelectedRow: (data: Value) => void;
+  }>;
+  onSelectedRow: (data: Value) => void;
 }

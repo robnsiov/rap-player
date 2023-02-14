@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
 import useConfirmModalStore from "../../../../store/confirm-modal-store";
 import fetchRequest from "../../../../utils/fetch-request/fetch-request";
 import makeToast from "../../../../utils/toast";
@@ -10,13 +8,12 @@ type APIOperation = "Edit" | "Delete" | "Insert";
 function usePageContainer<Values, Value, SelectedRow>({
   clickOnRowManager,
   defaultSelected,
-  schemaValidation,
   columns,
   createRows,
+  onSelectedRow,
 }: {
   clickOnRowManager({}: Value): SelectedRow;
   defaultSelected: SelectedRow & { selected: Value };
-  schemaValidation: z.ZodObject<any>;
   columns: Array<string>;
   createRows({
     data,
@@ -25,6 +22,7 @@ function usePageContainer<Values, Value, SelectedRow>({
     data: Values;
     clickOnRow(data: Value): void;
   }): Array<JSX.Element>;
+  onSelectedRow(data: Value): void;
 }) {
   const searchParams = useSearchParams();
 
@@ -35,10 +33,8 @@ function usePageContainer<Values, Value, SelectedRow>({
     total: 0,
     active: searchParams.get("_page") ?? 1,
   });
-  const [tableStutus, setTableStatus] = useState({
-    error: false,
-    loading: true,
-  });
+  const [tableLoading, setTableLoading] = useState(true);
+  const [tableError, setTableError] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const closeModal = () => {
@@ -60,30 +56,32 @@ function usePageContainer<Values, Value, SelectedRow>({
     SelectedRow & { selected: { id: number } }
   >(defaultSelected as SelectedRow & { selected: { id: number } });
 
-  const [formValuAfterUpdate, setFormValueAfterUpdate] = useState<{
-    title: string;
-  }>({ title: "" });
+  const [formValuAfterUpdate, setFormValueAfterUpdate] = useState<{}>({
+    title: "",
+  });
 
   const clickOnRow = (data: Value) => {
     setOpenModal(true);
     const res = clickOnRowManager(data);
+    onSelectedRow(data);
     setSelectedRow(res as SelectedRow & { selected: { id: number } });
   };
 
   const getData = async (activePage?: number) => {
-    setTableStatusManager("loading", true);
+    setTableLoading(true);
     const { data, isError } = await fetchRequest<Values>({
       url: `/categories?_page=${activePage ?? pages.active}`,
       onEnd() {
-        setTableStatusManager("loading", false);
+        setTableLoading(false);
       },
     });
 
     if (isError) {
-      setTableStatusManager("error", true);
+      setTableError(true);
       return;
     }
 
+    setTableError(false);
     const rows = createRows({ data: data.result as Values, clickOnRow });
     setPages((prev) => ({ ...prev, total: 2 }));
     setDataResource(rows);
@@ -93,11 +91,6 @@ function usePageContainer<Values, Value, SelectedRow>({
     router.push(`${pathname}?_page=${page}`);
     getData(page);
     setPages((prev) => ({ ...prev, active: page }));
-  };
-
-  const setTableStatusManager = (key: "loading" | "error", status: boolean) => {
-    if (key === "loading") setTableStatus({ ...tableStutus, loading: status });
-    else if (key === "error") setTableStatus({ ...tableStutus, error: status });
   };
 
   useEffect(() => {
@@ -141,7 +134,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   const deleteOperation = async () => {
     const { isError } = await fetchRequest({
       method: "DELETE",
-      url: `/categories${selectedRow.selected.id}`,
+      url: `/categories/${selectedRow.selected.id}`,
       onEnd() {
         setOperationsLoadingManager("Delete", false);
       },
@@ -155,6 +148,8 @@ function usePageContainer<Values, Value, SelectedRow>({
   };
 
   const insertOperation = async () => {
+    const data = formValuAfterUpdate;
+    if ("id" in data) delete data.id;
     const { isError } = await fetchRequest({
       method: "POST",
       url: "categories",
@@ -190,7 +185,7 @@ function usePageContainer<Values, Value, SelectedRow>({
     }
   };
 
-  const formSubmit = (data: { title: string }) => {
+  const formSubmit = (data: object) => {
     setFormValueAfterUpdate(data);
     clickOnFooterBtns(apiOperation as APIOperation);
   };
@@ -209,14 +204,13 @@ function usePageContainer<Values, Value, SelectedRow>({
   return {
     columns,
     rows: dataSource,
-    tableStutus,
+    tableStutus: { loading: tableLoading, error: tableError },
     closeModal,
     openModal,
     clickOnFooterBtns,
     confirmModalOperarion,
     operationsLoading,
     selectedRow,
-    validation: toFormikValidationSchema(schemaValidation),
     formSubmit,
     createNewItem,
     addApiOperation,
