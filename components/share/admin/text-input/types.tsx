@@ -5,4 +5,6 @@ export default interface TextInputImpl {
   error?: string | undefined;
   touched?: boolean;
   name: string;
+  readOnly?: boolean;
+  className?: string;
 }

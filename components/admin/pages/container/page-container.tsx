@@ -48,10 +48,7 @@ function PageContainer<Values, Value, SelectedRow>({
         <div className="w-full flex justify-start items-center">
           <AdminTitle title="Category" />
         </div>
-        <VscEmptyWindow
-          onClick={createNewItem}
-          className="text-xl cursor-pointer text-one-dark-500 hover:text-gray-400"
-        />
+
         <TableGrid
           columns={columns}
           rows={rows}

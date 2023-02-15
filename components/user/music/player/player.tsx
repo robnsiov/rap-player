@@ -26,72 +26,74 @@ const Player = ({ src }: PlayerImpl) => {
 
   return (
     <>
-      <AudioPlayer
-        ref={playerRef}
-        src={src}
-        showSkipControls={true}
-        onClickNext={nextTrack}
-        onPlay={onPlay}
-        onEnded={onEndedMusic}
-        onPause={onPause}
-        onListen={onListenPlayer}
-        onClickPrevious={prevTrack}
-        className="bg-transparent text-white shadow-none p-0"
-        style={{
-          background: "transparent",
-          color: "#fff",
-          boxShadow: "none",
-          padding: "0",
-        }}
-        customIcons={{
-          play: (
-            <BtnWrapper>
-              <BsPlayCircleFill
-                onClick={clearDemo}
-                className="text-white text-[55px]"
-              />
-            </BtnWrapper>
-          ),
-          pause: (
-            <BtnWrapper>
-              <BsPauseCircleFill className="text-white text-[55px]" />
-            </BtnWrapper>
-          ),
-          rewind: (
-            <BtnWrapper>
-              <HiRewind className="text-white text-[26px]" />
-            </BtnWrapper>
-          ),
-          forward: (
-            <BtnWrapper>
-              <HiFastForward className="text-white text-[26px]" />
-            </BtnWrapper>
-          ),
-          previous: (
-            <BtnWrapper>
-              <GiPreviousButton className="text-white text-[20px]" />
-            </BtnWrapper>
-          ),
-          next: (
-            <BtnWrapper>
-              <GiPreviousButton className="text-white text-[20px]" />
-            </BtnWrapper>
-          ),
-          loop: (
-            <BtnWrapper>
-              <TbRepeatOnce className="text-white text-[20px]" />
-            </BtnWrapper>
-          ),
-          loopOff: (
-            <BtnWrapper>
-              <TbRepeat className="text-white text-[20px]" />
-            </BtnWrapper>
-          ),
-        }}
-        customVolumeControls={[
-          <Volume key="1" volume={volume[0]} onChange={changeVolume} />,
-        ]}
-      />
+      <div className="w-full">
+        <AudioPlayer
+          ref={playerRef}
+          src={src}
+          showSkipControls={true}
+          onClickNext={nextTrack}
+          onPlay={onPlay}
+          onEnded={onEndedMusic}
+          onPause={onPause}
+          onListen={onListenPlayer}
+          onClickPrevious={prevTrack}
+          className="bg-transparent text-white shadow-none p-0"
+          style={{
+            background: "transparent",
+            color: "#fff",
+            boxShadow: "none",
+            padding: "0",
+          }}
+          customIcons={{
+            play: (
+              <BtnWrapper>
+                <BsPlayCircleFill
+                  onClick={clearDemo}
+                  className="text-white text-[55px]"
+                />
+              </BtnWrapper>
+            ),
+            pause: (
+              <BtnWrapper>
+                <BsPauseCircleFill className="text-white text-[55px]" />
+              </BtnWrapper>
+            ),
+            rewind: (
+              <BtnWrapper>
+                <HiRewind className="text-white text-[26px]" />
+              </BtnWrapper>
+            ),
+            forward: (
+              <BtnWrapper>
+                <HiFastForward className="text-white text-[26px]" />
+              </BtnWrapper>
+            ),
+            previous: (
+              <BtnWrapper>
+                <GiPreviousButton className="text-white text-[20px]" />
+              </BtnWrapper>
+            ),
+            next: (
+              <BtnWrapper>
+                <GiPreviousButton className="text-white text-[20px]" />
+              </BtnWrapper>
+            ),
+            loop: (
+              <BtnWrapper>
+                <TbRepeatOnce className="text-white text-[20px]" />
+              </BtnWrapper>
+            ),
+            loopOff: (
+              <BtnWrapper>
+                <TbRepeat className="text-white text-[20px]" />
+              </BtnWrapper>
+            ),
+          }}
+          customVolumeControls={[
+            <Volume key="1" volume={volume[0]} onChange={changeVolume} />,
+          ]}
+        />
+      </div>
     </>
   );
 };

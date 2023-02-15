@@ -38,13 +38,6 @@
     height: unset;
   }
 }
-
-.ant-table-cell-row-hover {
-  background-color: #2429320f !important;
-  border-radius: unset !important;
-  cursor: pointer;
-}
-
 .rhap_button-clear {
   overflow: visible !important;
   display: flex !important;
@@ -65,6 +58,7 @@
   color: #fff !important;
   font-size: 14px !important;
 }
+
 .rhap_current-time {
   margin-right: 5px !important;
 }
@@ -99,6 +93,39 @@
 .rhap_volume-controls,
 .rhap_additional-controls {
   flex: unset !important;
+}
+.music-row {
+  .rhap_current-time,
+  .rhap_total-time {
+    color: #242932 !important;
+  }
+  .rhap_progress-filled {
+    background-color: #838d9f !important;
+  }
+  .rhap_controls-section {
+    margin-top: 10px !important;
+  }
+  .rhap_rewind-button,
+  .rhap_forward-button {
+    display: none !important;
+  }
+  .rhap_play-pause-button {
+    justify-content: flex-start !important;
+  }
+  .rhap_additional-controls {
+    display: none !important;
+  }
+  .rhap_stacked {
+    flex-direction: row !important;
+  }
+  .rhap_rewind-button {
+    width: auto !important;
+  }
+  .rhap_controls-section {
+    margin-top: 0 !important;
+    flex: unset !important;
+    margin-left: 10px !important;
+  }
 }
 
 @layer components {

@@ -7,7 +7,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="min-h-screen w-full flex justify-start items-start  bg-gray-300/50">
         <ToastContainer />
         <Sidebar />
-        {children}
+        <div className="w-full overflow-hidden">{children}</div>
       </div>
     </>
   );
