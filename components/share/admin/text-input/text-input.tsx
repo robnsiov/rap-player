@@ -13,7 +13,7 @@ const TextInput = ({
 }: TextInputImpl) => {
   return (
     <>
-      <div className="flex justify-center items-start flex-col w-full">
+      <div className="flex justify-center items-start flex-col w-full mb-2">
         <label className="text-gray-500 mb-1 text-[16px] cursor-pointer">
           {label}
         </label>

@@ -1,13 +1,12 @@
 "use client";
 
 import { Form, Formik } from "formik";
-import CheckBox from "../../../share/admin/check-box/check-box";
 import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
 import { Creators, Creator, SelectedRow } from "./types";
-import useAdminHome from "./use-admin-home";
+import useAdminArtist from "./use-admin-remix-creators";
 
-const AdminHome = () => {
+const AdminRemixCreators = () => {
   const {
     change,
     clickOnRowManager,
@@ -15,7 +14,7 @@ const AdminHome = () => {
     createRows,
     defaultSelected,
     schema,
-  } = useAdminHome();
+  } = useAdminArtist();
   const ModalForm: React.FC<{
     Footer: React.ReactNode;
     submit: (data: Object) => void;
@@ -37,34 +36,12 @@ const AdminHome = () => {
           <Form className="w-full">
             <div className="mb-3 w-full">
               <TextInput
-                name="src"
-                label="Music"
-                placeholder="Enter your music link..."
-                error={errors.src}
-                touched={touched.src}
+                name="name"
+                label="Name"
+                placeholder="Enter your remix creator..."
+                error={errors.name}
+                touched={touched.name}
               />
-              <TextInput
-                name="cover"
-                label="Cover"
-                placeholder="Enter your cover link..."
-                error={errors.cover}
-                touched={touched.cover}
-              />
-              <TextInput
-                name="demo"
-                label="Demo"
-                placeholder="Enter your demo link..."
-                error={errors.demo}
-                touched={touched.demo}
-              />
-              <TextInput
-                name="title"
-                label="Title"
-                placeholder="Enter your title..."
-                error={errors.title}
-                touched={touched.title}
-              />
-              <CheckBox />
             </div>
             {Footer}
           </Form>
@@ -82,10 +59,10 @@ const AdminHome = () => {
         createRows={createRows}
         Form={ModalForm}
         onSelectedRow={change}
-        path="/musics"
-        title="Musics"
+        path="/creators"
+        title="RemixCreators"
       />
     </>
   );
 };
-export default AdminHome;
+export default AdminRemixCreators;

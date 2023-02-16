@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useMusicPageStore from "../../../store/music-page-store";
 import useSingleMusicStore from "../../../store/single-music-store";
-import { useCopyToClipboard } from "usehooks-ts";
 
 const useMusic = () => {
   const [showBackdrop, setShowBackdrop] = useState(false);
@@ -21,10 +20,9 @@ const useMusic = () => {
     ]
   );
   const [showCopyMessage, setShowCopyMessage] = useState(false);
-  const [_, copyTo] = useCopyToClipboard();
 
   const copyToClipBoard = () => {
-    copyTo(src);
+    navigator.clipboard.writeText(src);
   };
 
   const changeCopyMessageShowing = (show: boolean) => {

@@ -5,7 +5,6 @@ import localForage from "localforage";
 import Image from "next/image";
 import MusicRow from "../../../share/admin/music-row/music-row";
 import { MdContentCopy } from "react-icons/md";
-import { useCopyToClipboard } from "usehooks-ts";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 interface InputsData {
@@ -40,7 +39,6 @@ const useAdminUploader = () => {
     perPage: 5,
   });
   const [totalPages, setTotalPages] = useState(0);
-  const [_, copyTo] = useCopyToClipboard();
   const uploaderRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -90,7 +88,7 @@ const useAdminUploader = () => {
 
   const copyToClipboard = (src: string, cover: string, demo: string) => {
     makeToast({ message: "Item(s) were copied", type: "success" });
-    copyTo(`[${src},${cover},${demo}]`);
+    navigator.clipboard.writeText(`[${src},${cover},${demo}]`);
   };
 
   const changeActivePage = (page: number) => {
@@ -112,7 +110,7 @@ const useAdminUploader = () => {
       setTableLoading(false);
       const output = data as Array<Array<string>>;
       console.log(output);
-      const start = pageData.activePage * pageData.perPage - pageData.perPage;
+      const start = +pageData.activePage * pageData.perPage - pageData.perPage;
       const end = start + pageData.perPage;
       setTotalPages(Math.ceil(output[0].length / pageData.perPage));
       const sr = output[0].slice(start, end);
@@ -183,6 +181,9 @@ const useAdminUploader = () => {
     }
     makeToast({ message: "File(s) uploaded successfully", type: "success" });
     closeModal();
+    setInputsData({ cover: "", demo: "", src: "" });
+    setFilesData({} as FilesData);
+
     const cover = localForage.getItem("cover").then((value) => {
       const array = value as Array<string>;
       array.unshift(

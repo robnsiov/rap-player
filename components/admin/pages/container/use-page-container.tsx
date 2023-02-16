@@ -11,6 +11,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   columns,
   createRows,
   onSelectedRow,
+  path,
 }: {
   clickOnRowManager({}: Value): SelectedRow;
   defaultSelected: SelectedRow & { selected: Value };
@@ -23,6 +24,7 @@ function usePageContainer<Values, Value, SelectedRow>({
     clickOnRow(data: Value): void;
   }): Array<JSX.Element>;
   onSelectedRow(data: Value): void;
+  path: string;
 }) {
   const searchParams = useSearchParams();
 
@@ -56,9 +58,7 @@ function usePageContainer<Values, Value, SelectedRow>({
     SelectedRow & { selected: { id: number } }
   >(defaultSelected as SelectedRow & { selected: { id: number } });
 
-  const [formValuAfterUpdate, setFormValueAfterUpdate] = useState<{}>({
-    title: "",
-  });
+  const [formValuAfterUpdate, setFormValueAfterUpdate] = useState<{}>({});
 
   const clickOnRow = (data: Value) => {
     setOpenModal(true);
@@ -70,7 +70,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   const getData = async (activePage?: number) => {
     setTableLoading(true);
     const { data, isError } = await fetchRequest<Values>({
-      url: `/categories?_page=${activePage ?? pages.active}`,
+      url: `${path}?_page=${activePage ?? pages.active}`,
       onEnd() {
         setTableLoading(false);
       },
@@ -117,7 +117,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   const editOperation = async () => {
     const { isError } = await fetchRequest({
       method: "PATCH",
-      url: `/categories/${selectedRow.selected.id}`,
+      url: `${path}/${selectedRow.selected.id}`,
       inputData: formValuAfterUpdate,
       onEnd() {
         setOperationsLoadingManager("Edit", false);
@@ -134,7 +134,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   const deleteOperation = async () => {
     const { isError } = await fetchRequest({
       method: "DELETE",
-      url: `/categories/${selectedRow.selected.id}`,
+      url: `${path}/${selectedRow.selected.id}`,
       onEnd() {
         setOperationsLoadingManager("Delete", false);
       },
@@ -152,7 +152,7 @@ function usePageContainer<Values, Value, SelectedRow>({
     if ("id" in data) delete data.id;
     const { isError } = await fetchRequest({
       method: "POST",
-      url: "categories",
+      url: path,
       inputData: formValuAfterUpdate,
       onEnd() {
         setOperationsLoadingManager("Insert", false);

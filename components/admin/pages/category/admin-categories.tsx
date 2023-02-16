@@ -1,59 +1,21 @@
 "use client";
 
 import { Form, Formik } from "formik";
-import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
 import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
-import { useState } from "react";
-interface Category {
-  id: number;
-  title: string;
-}
-type Categories = Array<Category>;
-interface SelectedRow {
-  defaultForm: { title: string };
-  selected: Category;
-}
-
-const clickOnRowManager = ({ id, title }: Category): SelectedRow => {
-  return {
-    defaultForm: { title },
-    selected: { id, title },
-  };
-};
-const schema = z.object({
-  title: z.string().min(2).max(32).trim(),
-});
-const columns = ["id", "title"];
-const createRows = ({
-  data,
-  clickOnRow,
-}: {
-  data: Categories;
-  clickOnRow: (data: Category) => void;
-}) => {
-  return data.map(({ id, title }) => (
-    <tr
-      key={id}
-      className="cursor-pointer"
-      onClick={() => clickOnRow({ id, title })}
-    >
-      <td>{id}</td>
-      <td>{title}</td>
-    </tr>
-  ));
-};
+import { Categories, Category, SelectedRow } from "./types";
+import useAdminCategory from "./use-admin-categories";
 
 const AdminCategory = () => {
-  const [defaultSelected, setDefaultForm] = useState<SelectedRow>({
-    defaultForm: { title: "" },
-    selected: { id: -1, title: "" },
-  });
-  const change = (data: Category) => {
-    setDefaultForm({ ...defaultSelected, defaultForm: data });
-  };
-  const U: React.FC<{
+  const {
+    change,
+    clickOnRowManager,
+    columns,
+    createRows,
+    defaultSelected,
+    schema,
+  } = useAdminCategory();
+  const ModalForm: React.FC<{
     Footer: React.ReactNode;
     submit: (data: Object) => void;
   }> = ({
@@ -65,7 +27,7 @@ const AdminCategory = () => {
   }) => {
     return (
       <Formik
-        validationSchema={toFormikValidationSchema(schema)}
+        validationSchema={schema}
         initialValues={defaultSelected.defaultForm}
         onSubmit={submit}
         enableReinitialize={true}
@@ -95,8 +57,11 @@ const AdminCategory = () => {
         clickOnRowManager={clickOnRowManager}
         columns={columns}
         createRows={createRows}
-        Form={U}
+        Form={ModalForm}
         onSelectedRow={change}
+        path="/categories"
+        title="Categories"
+        modalTitle="Category"
       />
     </>
   );

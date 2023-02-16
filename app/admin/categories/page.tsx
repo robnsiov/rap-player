@@ -1,4 +1,4 @@
-import AdminCategory from "../../../components/admin/pages/category/admin-category";
+import AdminCategory from "../../../components/admin/pages/category/admin-categories";
 
 const Category = () => {
   return (

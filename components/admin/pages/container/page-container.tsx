@@ -5,10 +5,7 @@ import FooterModal from "../../modals/footer-modal/footer-modal";
 import Modal from "../../modals/modal/modal";
 import TableGrid from "../../table/table-grid";
 import usePageContainer from "./use-page-container";
-import { Form, Formik } from "formik";
-import TextInput from "../../../share/admin/text-input/text-input";
 import AdminTitle from "../../title/admin-title";
-import { VscEmptyWindow } from "react-icons/vsc";
 import PageContainerImpl from "./types";
 
 function PageContainer<Values, Value, SelectedRow>({
@@ -18,6 +15,9 @@ function PageContainer<Values, Value, SelectedRow>({
   createRows,
   Form,
   onSelectedRow,
+  path,
+  title,
+  modalTitle = title.slice(0, -1),
 }: PageContainerImpl<Values, Value, SelectedRow>) {
   const {
     rows,
@@ -40,13 +40,14 @@ function PageContainer<Values, Value, SelectedRow>({
     columns,
     createRows,
     onSelectedRow,
+    path,
   });
 
   return (
     <>
       <div className="w-full flex justify-center items-end flex-col p-4">
         <div className="w-full flex justify-start items-center">
-          <AdminTitle title="Category" />
+          <AdminTitle title={title} />
         </div>
 
         <TableGrid
@@ -63,7 +64,7 @@ function PageContainer<Values, Value, SelectedRow>({
 
         <Modal open={openModal} close={closeModal}>
           <div className="w-full justify-center items-center">
-            <AdminTitle title="Category" />
+            <AdminTitle title={modalTitle} />
             <Form
               submit={formSubmit}
               onSelectedRow={onSelectedRow}

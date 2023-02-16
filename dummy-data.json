@@ -12,13 +12,25 @@
       "name": "x"
     }
   ],
-  "categories": [
+  "artists": [
     {
-      "id": 2,
-      "title": "110"
+      "name": "svdjsvd",
+      "id": 1
+    }
+  ],
+  "creators": [
+    {
+      "name": "svdjsvd",
+      "id": 1
     },
     {
-      "title": "cat4",
+      "name": "xvvchxvcx",
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "title": "cat40",
       "id": 4
     },
     {
@@ -48,6 +60,32 @@
     {
       "title": "sdksbdsn",
       "id": 16
+    },
+    {
+      "title": "888",
+      "id": 17
+    },
+    {
+      "title": "999",
+      "id": 18
+    },
+    {
+      "name": "",
+      "title": "create",
+      "id": 19
+    },
+    {
+      "name": "",
+      "title": "svdsvds",
+      "id": 20
+    },
+    {
+      "name": "sjvdvsds",
+      "id": 21
+    },
+    {
+      "name": "sjdvsdvsd",
+      "id": 22
     }
   ],
   "musics": [

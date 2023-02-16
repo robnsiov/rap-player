@@ -15,4 +15,7 @@ export default interface PageContainerImpl<Values, Value, SelectedRow> {
     onSelectedRow: (data: Value) => void;
   }>;
   onSelectedRow: (data: Value) => void;
+  path: string;
+  title: string;
+  modalTitle?: string;
 }
