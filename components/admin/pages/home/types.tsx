@@ -1,20 +1,15 @@
-interface Creator {
+interface Music {
   id: number;
   src: string;
   demo: string;
   cover: string;
   top: boolean;
   title: string;
+  categories: Array<{ id: number; title: string }>;
 }
-type Creators = Array<Creator>;
+type Musics = Array<Music>;
 interface SelectedRow {
-  defaultForm: {
-    src: string;
-    demo: string;
-    cover: string;
-    top: boolean;
-    title: string;
-  };
-  selected: Creator;
+  defaultForm: Music;
+  selected: Music;
 }
-export type { Creators, Creator, SelectedRow };
+export type { Musics, Music, SelectedRow };

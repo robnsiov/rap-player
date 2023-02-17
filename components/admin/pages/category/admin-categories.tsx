@@ -3,10 +3,13 @@
 import { Form, Formik } from "formik";
 import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
-import { Categories, Category, SelectedRow } from "./types";
+import AdminCategoryImpl, { Categories, Category, SelectedRow } from "./types";
 import useAdminCategory from "./use-admin-categories";
 
-const AdminCategory = () => {
+const AdminCategory = ({
+  openByAnother = false,
+  clickOnRowByAnotherOpen = () => {},
+}: AdminCategoryImpl) => {
   const {
     change,
     clickOnRowManager,
@@ -62,6 +65,8 @@ const AdminCategory = () => {
         path="/categories"
         title="Categories"
         modalTitle="Category"
+        openByAnother={openByAnother}
+        clickOnRowByAnotherOpen={clickOnRowByAnotherOpen}
       />
     </>
   );

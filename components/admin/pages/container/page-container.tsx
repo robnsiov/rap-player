@@ -18,6 +18,8 @@ function PageContainer<Values, Value, SelectedRow>({
   path,
   title,
   modalTitle = title.slice(0, -1),
+  openByAnother = false,
+  clickOnRowByAnotherOpen = () => {},
 }: PageContainerImpl<Values, Value, SelectedRow>) {
   const {
     rows,
@@ -41,14 +43,18 @@ function PageContainer<Values, Value, SelectedRow>({
     createRows,
     onSelectedRow,
     path,
+    openByAnother,
+    clickOnRowByAnotherOpen,
   });
 
   return (
     <>
       <div className="w-full flex justify-center items-end flex-col p-4">
-        <div className="w-full flex justify-start items-center">
-          <AdminTitle title={title} />
-        </div>
+        {!openByAnother && (
+          <div className="w-full flex justify-start items-center">
+            <AdminTitle title={title} />
+          </div>
+        )}
 
         <TableGrid
           columns={columns}

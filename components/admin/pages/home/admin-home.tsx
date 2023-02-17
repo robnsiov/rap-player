@@ -2,9 +2,12 @@
 
 import { Form, Formik } from "formik";
 import CheckBox from "../../../share/admin/check-box/check-box";
+import MultiSelect from "../../../share/admin/multi-select/multi-select";
 import TextInput from "../../../share/admin/text-input/text-input";
+import Modal from "../../modals/modal/modal";
+import AdminCategory from "../category/admin-categories";
 import PageContainer from "../container/page-container";
-import { Creators, Creator, SelectedRow } from "./types";
+import { Musics, Music, SelectedRow } from "./types";
 import useAdminHome from "./use-admin-home";
 
 const AdminHome = () => {
@@ -15,6 +18,10 @@ const AdminHome = () => {
     createRows,
     defaultSelected,
     schema,
+    clickOnCategoryRow,
+    closeModal,
+    openModal,
+    removeCategory,
   } = useAdminHome();
   const ModalForm: React.FC<{
     Footer: React.ReactNode;
@@ -64,6 +71,14 @@ const AdminHome = () => {
                 error={errors.title}
                 touched={touched.title}
               />
+              <MultiSelect
+                selections={defaultSelected.defaultForm.categories}
+                onClickDB={() => closeModal(true)}
+                label="Categories"
+                onSelect={removeCategory}
+                error={errors.categories as string | undefined}
+                touched={touched.categories as boolean | undefined}
+              />
               <CheckBox />
             </div>
             {Footer}
@@ -75,7 +90,7 @@ const AdminHome = () => {
 
   return (
     <>
-      <PageContainer<Creators, Creator, SelectedRow>
+      <PageContainer<Musics, Music, SelectedRow>
         defaultSelected={defaultSelected}
         clickOnRowManager={clickOnRowManager}
         columns={columns}
@@ -85,6 +100,12 @@ const AdminHome = () => {
         path="/musics"
         title="Musics"
       />
+      <Modal open={openModal} close={closeModal}>
+        <AdminCategory
+          openByAnother={true}
+          clickOnRowByAnotherOpen={clickOnCategoryRow}
+        />
+      </Modal>
     </>
   );
 };

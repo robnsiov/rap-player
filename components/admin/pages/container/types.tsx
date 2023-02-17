@@ -18,4 +18,6 @@ export default interface PageContainerImpl<Values, Value, SelectedRow> {
   path: string;
   title: string;
   modalTitle?: string;
+  openByAnother?: boolean;
+  clickOnRowByAnotherOpen?(data: Value): void;
 }

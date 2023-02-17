@@ -12,6 +12,8 @@ function usePageContainer<Values, Value, SelectedRow>({
   createRows,
   onSelectedRow,
   path,
+  openByAnother = false,
+  clickOnRowByAnotherOpen = () => {},
 }: {
   clickOnRowManager({}: Value): SelectedRow;
   defaultSelected: SelectedRow & { selected: Value };
@@ -25,6 +27,8 @@ function usePageContainer<Values, Value, SelectedRow>({
   }): Array<JSX.Element>;
   onSelectedRow(data: Value): void;
   path: string;
+  openByAnother?: boolean;
+  clickOnRowByAnotherOpen?(data: Value): void;
 }) {
   const searchParams = useSearchParams();
 
@@ -60,10 +64,19 @@ function usePageContainer<Values, Value, SelectedRow>({
 
   const [formValuAfterUpdate, setFormValueAfterUpdate] = useState<{}>({});
 
-  const clickOnRow = (data: Value) => {
-    setOpenModal(true);
+  const clickOnRow = (data: Value, newItem?: boolean) => {
     const res = clickOnRowManager(data);
+    if (openByAnother) {
+      clickOnRowByAnotherOpen(data);
+      setSelectedRow(res as SelectedRow & { selected: { id: number } });
+      if (newItem) {
+        setOpenModal(true);
+      }
+      return;
+    }
+    setOpenModal(true);
     onSelectedRow(data);
+    console.log(data);
     setSelectedRow(res as SelectedRow & { selected: { id: number } });
   };
 
@@ -88,7 +101,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   };
 
   const onChangePage = (page: number) => {
-    router.push(`${pathname}?_page=${page}`);
+    if (!openByAnother) router.push(`${pathname}?_page=${page}`);
     getData(page);
     setPages((prev) => ({ ...prev, active: page }));
   };
@@ -194,7 +207,7 @@ function usePageContainer<Values, Value, SelectedRow>({
 
   const createNewItem = () => {
     setApiOperation("Insert");
-    clickOnRow({ ...defaultSelected.selected, id: -1 });
+    clickOnRow({ ...defaultSelected.selected, id: -1 }, true);
   };
 
   const addApiOperation = (operation: APIOperation) => {
