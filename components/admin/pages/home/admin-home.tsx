@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import CheckBox from "../../../share/admin/check-box/check-box";
 import MultiSelect from "../../../share/admin/multi-select/multi-select";
 import TextInput from "../../../share/admin/text-input/text-input";
+import SwitchButton from "../../../share/switch-button/switch-button";
 import Modal from "../../modals/modal/modal";
 import AdminCategory from "../category/admin-categories";
 import PageContainer from "../container/page-container";
@@ -22,6 +23,8 @@ const AdminHome = () => {
     closeModal,
     openModal,
     removeCategory,
+    toggleTopCheckBox,
+    handlePasteToInputs,
   } = useAdminHome();
   const ModalForm: React.FC<{
     Footer: React.ReactNode;
@@ -40,7 +43,7 @@ const AdminHome = () => {
         onSubmit={submit}
         enableReinitialize={true}
       >
-        {({ touched, errors }) => (
+        {({ touched, errors, setFieldValue }) => (
           <Form className="w-full">
             <div className="mb-3 w-full">
               <TextInput
@@ -49,6 +52,15 @@ const AdminHome = () => {
                 placeholder="Enter your music link..."
                 error={errors.src}
                 touched={touched.src}
+                inputProps={{
+                  onChange(e: React.FormEvent<HTMLInputElement>) {
+                    handlePasteToInputs(
+                      e.currentTarget.value,
+                      "src",
+                      setFieldValue
+                    );
+                  },
+                }}
               />
               <TextInput
                 name="cover"
@@ -56,6 +68,15 @@ const AdminHome = () => {
                 placeholder="Enter your cover link..."
                 error={errors.cover}
                 touched={touched.cover}
+                inputProps={{
+                  onChange(e: React.FormEvent<HTMLInputElement>) {
+                    handlePasteToInputs(
+                      e.currentTarget.value,
+                      "cover",
+                      setFieldValue
+                    );
+                  },
+                }}
               />
               <TextInput
                 name="demo"
@@ -63,6 +84,15 @@ const AdminHome = () => {
                 placeholder="Enter your demo link..."
                 error={errors.demo}
                 touched={touched.demo}
+                inputProps={{
+                  onChange(e: React.FormEvent<HTMLInputElement>) {
+                    handlePasteToInputs(
+                      e.currentTarget.value,
+                      "demo",
+                      setFieldValue
+                    );
+                  },
+                }}
               />
               <TextInput
                 name="title"
@@ -79,7 +109,13 @@ const AdminHome = () => {
                 error={errors.categories as string | undefined}
                 touched={touched.categories as boolean | undefined}
               />
-              <CheckBox />
+              <CheckBox
+                onChange={toggleTopCheckBox}
+                checked={defaultSelected.defaultForm.top}
+                label="Top"
+                error={errors.top}
+                touched={touched.top}
+              />
             </div>
             {Footer}
           </Form>

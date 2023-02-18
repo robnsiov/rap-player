@@ -12,7 +12,7 @@ const MultiSelect = ({
 }: MultiSelectImpl) => {
   return (
     <>
-      <div className="flex justify-center items-start flex-col w-full mb-2">
+      <div className="flex justify-center items-start flex-col w-full mb-3">
         <label
           onClick={onClickDB}
           className="text-gray-500 mb-1 text-[16px] cursor-pointer"

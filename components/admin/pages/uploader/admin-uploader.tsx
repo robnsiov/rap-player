@@ -36,7 +36,7 @@ const AdminUploader = () => {
         <TableGrid
           loading={tableLoading}
           totalPages={totalPages}
-          activePage={pageData.activePage}
+          activePage={+pageData.activePage}
           onChangePage={changeActivePage}
           onInsert={() => closeModal(true)}
           rows={dataSource}

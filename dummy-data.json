@@ -90,6 +90,10 @@
     {
       "title": "8888888",
       "id": 23
+    },
+    {
+      "title": "vxzxvhzx",
+      "id": 24
     }
   ],
   "musics": [
@@ -100,6 +104,366 @@
       "title": "Vasiat2",
       "cover": "https://songha.ir/wp-content/uploads/2020/09/naaji-vasiat-2.jpg",
       "duration": 325,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Pishro"
+        },
+        {
+          "id": 2,
+          "name": "021kid"
+        }
+      ]
+    },
+    {
+      "id": 2012,
+      "src": "https://file.songha.ir/N/Naaji/Single/Naaji.Tocka.128.Songha.ir.mp3",
+      "title": "Toska",
+      "cover": "https://songha.ir/wp-content/uploads/2022/05/naaji-min.jpg",
+      "demo": "/demos/4_5967824179817353114.ogg",
+      "duration": 125,
       "artists": [
         {
           "id": 1,

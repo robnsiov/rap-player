@@ -10,6 +10,7 @@ interface FetchRequestImpl {
   onBadRequestError?(): void;
   onSuccess?(): void;
   onEnd?(): void;
+  onBefore?(): void;
 }
 interface OutputFetchRequest<T> {
   data: { result: T | []; error: {} | null | [] };
@@ -29,13 +30,14 @@ async function fetchRequest<T>({
   onNetworkError = defaultFtech,
   onError = defaultFtech,
   onEnd = defaultFtech,
+  onBefore = defaultFtech,
 }: FetchRequestImpl) {
   const requestOutput: OutputFetchRequest<T> = {
     isError: false,
     status: -1,
     data: { result: [], error: null },
   };
-
+  onBefore();
   try {
     const { data, status } = await axios({
       baseURL,

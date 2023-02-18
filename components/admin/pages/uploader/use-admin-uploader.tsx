@@ -6,6 +6,7 @@ import Image from "next/image";
 import MusicRow from "../../../share/admin/music-row/music-row";
 import { MdContentCopy } from "react-icons/md";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import ImageRow from "../../../share/admin/image-row/image-row";
 
 interface InputsData {
   src: string;
@@ -88,7 +89,8 @@ const useAdminUploader = () => {
 
   const copyToClipboard = (src: string, cover: string, demo: string) => {
     makeToast({ message: "Item(s) were copied", type: "success" });
-    navigator.clipboard.writeText(`[${src},${cover},${demo}]`);
+    // 
+    navigator.clipboard.writeText(`**${src}@${cover}@${demo}##`);
   };
 
   const changeActivePage = (page: number) => {
@@ -124,14 +126,7 @@ const useAdminUploader = () => {
           <td>
             {cv[i].length !== 0 && (
               <div className="w-[60px] h-[60px]">
-                <Image
-                  priority
-                  className="object-cover object-center rounded-md"
-                  width={60}
-                  height={60}
-                  src={cv[i]}
-                  alt={cv[i]}
-                />
+                <ImageRow src={cv[i]} />
               </div>
             )}
           </td>

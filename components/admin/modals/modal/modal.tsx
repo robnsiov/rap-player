@@ -37,16 +37,20 @@ const Modal = ({
            }`}
           >
             <div
-              className={`p-4 bg-white rounded-xl w-full  flex justify-center items-center flex-col ${className}`}
+              className={`overflow-hidden rounded-xl w-full flex justify-center items-center  ${className}`}
             >
-              <div className="w-full flex justify-end items-center mb-3">
-                <IoMdClose
-                  onClick={closeModalByIcon}
-                  className="duration-200 transition-all hover:text-gray-500
+              <div
+                className={`p-4  max-h-[700px] bg-white rounded-xl w-full  flex justify-start overflow-auto items-center flex-col`}
+              >
+                <div className="w-full flex justify-end items-center mb-3">
+                  <IoMdClose
+                    onClick={closeModalByIcon}
+                    className="duration-200 transition-all hover:text-gray-500
                text-xl text-gray-700 cursor-pointer "
-                />
+                  />
+                </div>
+                {children}
               </div>
-              {children}
             </div>
           </div>
         </div>

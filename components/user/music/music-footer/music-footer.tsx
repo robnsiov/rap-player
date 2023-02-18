@@ -10,7 +10,9 @@ const MusicFooter = ({ href }: musicFooterImpl) => {
   return (
     <>
       <div className="text-white absolute bottom-0 right-0 left-0 py-4 px-4 flex justify-between items-center rounded-xl rounded-t-none">
-        <FooterItem onClick={onClickhomeIcon} title="Home" icon={HiHome} />
+        <div className="hidden md:flex">
+          <FooterItem onClick={onClickhomeIcon} title="Home" icon={HiHome} />
+        </div>
         <FooterItem
           onClick={onClickSearchIcon}
           title="Search"

@@ -6,4 +6,5 @@ export default interface SkeletonLoadingImpl {
   baseColor?: string;
   highlightColor?: string;
   fadeClassName?: string;
+  noFade?: boolean
 }

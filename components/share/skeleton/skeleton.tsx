@@ -12,22 +12,41 @@ const SkeletonLoading = ({
   inProp,
   baseColor = "#2c313a",
   highlightColor = "#181d27f2",
+  noFade = false,
 }: SkeletonLoadingImpl) => {
   return (
     <>
-      <FadeAnimation
-        inProp={inProp}
-        className={`w-full h-full overflow-hidden rounded-2xl ${fadeClassName}`}
-      >
-        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-          <Skeleton
-            count={count}
-            containerClassName={`w-full h-full flex flex-col ${containerClassName}`}
-            className={className}
-            inline={true}
-          />
-        </SkeletonTheme>
-      </FadeAnimation>
+      {noFade ? (
+        <>
+          {inProp && (
+            <SkeletonTheme
+              baseColor={baseColor}
+              highlightColor={highlightColor}
+            >
+              <Skeleton
+                count={count}
+                containerClassName={`w-full h-full flex flex-col ${containerClassName}`}
+                className={className}
+                inline={true}
+              />
+            </SkeletonTheme>
+          )}
+        </>
+      ) : (
+        <FadeAnimation
+          inProp={inProp}
+          className={`w-full h-full overflow-hidden rounded-2xl ${fadeClassName}`}
+        >
+          <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+            <Skeleton
+              count={count}
+              containerClassName={`w-full h-full flex flex-col ${containerClassName}`}
+              className={className}
+              inline={true}
+            />
+          </SkeletonTheme>
+        </FadeAnimation>
+      )}
     </>
   );
 };

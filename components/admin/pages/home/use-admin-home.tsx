@@ -3,6 +3,8 @@ import { useState } from "react";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import makeToast from "../../../../utils/toast";
+import ImageRow from "../../../share/admin/image-row/image-row";
+import MusicRow from "../../../share/admin/music-row/music-row";
 import { Category } from "../category/types";
 import { Musics, Music, SelectedRow } from "./types";
 
@@ -79,11 +81,17 @@ const useAdminHome = () => {
         }
       >
         <td>{id}</td>
-        <td>{cover}</td>
-        <td>{src}</td>
-        <td>{demo}</td>
+        <td>
+          <ImageRow src={cover} />
+        </td>
+        <td>
+          <MusicRow data={src} />
+        </td>
+        <td>
+          <MusicRow data={demo} />
+        </td>
         <td>{title}</td>
-        <td>{top ? "YES" : "NO"}</td>
+        <td>{top ? "on" : "off"}</td>
         <td>psd</td>
       </tr>
     ));
@@ -115,6 +123,36 @@ const useAdminHome = () => {
     closeModal();
   };
 
+  const toggleTopCheckBox = (check: boolean) => {
+    const defaultData = defaultSelected;
+    defaultData.defaultForm.top = check;
+    const clone = cloneDeep(defaultData);
+    setDefaultForm(clone);
+  };
+
+  const handlePasteToInputs = (
+    value: string,
+    key: string,
+    setFieldValue: (key: string, value: any) => void
+  ) => {
+    const indexStartBracket = value.indexOf("**");
+    const indexEndBracket = value.indexOf("##");
+    if (indexEndBracket !== -1 && indexStartBracket !== -1) {
+      const str = value.slice(indexStartBracket + 2, indexEndBracket);
+      const firstIndex = str.indexOf("@");
+      const lastIndex = str.lastIndexOf("@");
+      const itemOne = str.slice(0, firstIndex);
+      const itemTwo = str.slice(firstIndex + 1, lastIndex);
+      const itemThree = str.slice(lastIndex + 1);
+      console.log(itemOne, itemTwo, itemThree);
+      setFieldValue("src", itemOne);
+      setFieldValue("cover", itemTwo);
+      setFieldValue("demo", itemThree);
+    } else {
+      setFieldValue(key, value);
+    }
+  };
+
   return {
     schema: toFormikValidationSchema(schema),
     defaultSelected,
@@ -126,6 +164,8 @@ const useAdminHome = () => {
     openModal,
     closeModal,
     removeCategory,
+    toggleTopCheckBox,
+    handlePasteToInputs,
   };
 };
 export default useAdminHome;

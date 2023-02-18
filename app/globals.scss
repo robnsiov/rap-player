@@ -4,7 +4,7 @@
 
 @layer base {
   ::selection {
-    @apply bg-one-dark;
+    @apply bg-one-dark text-white;
   }
   body {
     height: 100vh;
@@ -36,6 +36,9 @@
   }
   .height-unset {
     height: unset;
+  }
+  .rounded-lg-important {
+    border-radius: 0.5rem !important;
   }
 }
 .rhap_button-clear {

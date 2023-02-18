@@ -10,6 +10,7 @@ const TextInput = ({
   name,
   readOnly = false,
   className = "",
+  inputProps = {},
 }: TextInputImpl) => {
   return (
     <>
@@ -20,8 +21,10 @@ const TextInput = ({
         <Field
           name={name}
           type={type}
+          spellCheck={false}
           placeholder={placeholder}
           readOnly={readOnly}
+          {...inputProps}
           className={`w-full py-2 px-3 text-[14px] text-gray-500 
           placeholder:text-xs placeholder:text-gray-500 rounded-[8px] border-2 border-gray-500 outline-none focus:ring-2 focus:ring-gray-300 ${className}`}
         />
