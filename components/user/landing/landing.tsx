@@ -7,13 +7,14 @@ import { HiOutlineCloudDownload } from "react-icons/hi";
 import useLanding from "./use-landing";
 import FadeAnimation from "../../share/animations/fade/fade-animation";
 import BtnBorderAnim from "../../UI/buttons/btn-border-anim/btn-border-anim";
+import LandingImpl from "./types";
 
-const Landing = () => {
+const Landing = ({ fullScreen = () => {} }: LandingImpl) => {
   const { hide, hideLanding } = useLanding();
 
   return (
     <>
-      <FadeAnimation inProp={!hide}>
+      <FadeAnimation inProp={!hide} className="absolute inset-0 z-[999]">
         <div className="p-4 h-screen w-full flex items-center justify-center relative">
           <div className="absolute inset-0 z-20  bg-gradient-to-t from-one-dark to-white/20"></div>
           <div className="absolute inset-0 z-10">
@@ -34,7 +35,10 @@ const Landing = () => {
               </h1>
               <div className="flex items-center justify-center sm:flex-col w-full">
                 <BtnBorderAnim
-                  onClick={hideLanding}
+                  onClick={() => {
+                    hideLanding();
+                    fullScreen();
+                  }}
                   className="mr-4 mb-4 sm:mr-0"
                 >
                   Play <BsPlayCircle className="ml-3 text-2xl" />{" "}

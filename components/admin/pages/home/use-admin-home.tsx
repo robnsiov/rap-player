@@ -2,6 +2,8 @@ import { cloneDeep, filter } from "lodash";
 import { useState } from "react";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import { constants } from "../../../../constants/constants";
+import imageUrl from "../../../../utils/image-url/image-url";
 import makeToast from "../../../../utils/toast";
 import ImageRow from "../../../share/admin/image-row/image-row";
 import MusicRow from "../../../share/admin/music-row/music-row";
@@ -54,7 +56,6 @@ const useAdminHome = () => {
     top,
     categories,
   }: Music): SelectedRow => {
-    console.log(categories);
     return {
       defaultForm: { cover, demo, src, title, top, categories, id },
       selected: { id, cover, demo, src, title, top, categories },
@@ -82,7 +83,7 @@ const useAdminHome = () => {
       >
         <td>{id}</td>
         <td>
-          <ImageRow src={cover} />
+          <ImageRow src={imageUrl(cover)} />
         </td>
         <td>
           <MusicRow data={src} />
@@ -144,7 +145,6 @@ const useAdminHome = () => {
       const itemOne = str.slice(0, firstIndex);
       const itemTwo = str.slice(firstIndex + 1, lastIndex);
       const itemThree = str.slice(lastIndex + 1);
-      console.log(itemOne, itemTwo, itemThree);
       setFieldValue("src", itemOne);
       setFieldValue("cover", itemTwo);
       setFieldValue("demo", itemThree);

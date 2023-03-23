@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import secondsToTime from "../../../../utils/fetch-request/seconds-to-time/seconds-to-time";
+import musicUrl from "../../../../utils/music-url/music-url";
 import SingleMusicImpl from "./types";
 import useSingleMusic from "./use-single-music";
 
@@ -12,6 +13,7 @@ const SingleMusic = ({
   cover,
   id,
   src,
+  firstPlay,
 }: SingleMusicImpl) => {
   const {
     setDemoData,
@@ -22,7 +24,7 @@ const SingleMusic = ({
   } = useSingleMusic();
 
   const toDiginIndex = (index + 1).toString().padStart(2, "0");
-  const durationToTime = secondsToTime(duration); // 120 => 02:00
+  const durationToTime = secondsToTime(duration ?? 120); // 120 => 02:00
   return (
     <>
       <div className="w-full p-4  text-sm flex justify-between items-center  text-white relative cursor-pointer rounded-lg group">
@@ -49,7 +51,7 @@ const SingleMusic = ({
           }
           className="flex justify-center items-center  relative z-20 w-full overflow-hidden pr-3"
         >
-          {singleMusicId === id ? (
+          {singleMusicId === id && firstPlay ? (
             <div className="w-[40px] h-[40px] flex justify-start items-center">
               <div className=" min-h-[16px] flex items-end justify-center">
                 <span

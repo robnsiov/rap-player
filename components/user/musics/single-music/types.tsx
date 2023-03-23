@@ -7,4 +7,5 @@ export default interface SingleMusicImpl {
   src: string;
   demo?: string;
   id: number;
+  firstPlay: boolean;
 }

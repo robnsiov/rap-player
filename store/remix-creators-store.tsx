@@ -1,7 +1,13 @@
 import { create } from "zustand";
+import { constants } from "../constants/constants";
 import fetchRequest from "../utils/fetch-request/fetch-request";
 
-type RemixCreators = Array<{ value: string; label: string; id: number }>;
+type RemixCreators = Array<{
+  value: string;
+  label: string;
+  name: string;
+  id: number;
+}>;
 
 interface RemixCreatorsStoreImpl {
   creators: RemixCreators;
@@ -9,15 +15,28 @@ interface RemixCreatorsStoreImpl {
   fetch(): void;
 }
 
+interface CreatorsApiImpl {
+  result: RemixCreators;
+}
+
 const useRemixCreatorsStore = create<RemixCreatorsStoreImpl>((set) => ({
   creators: [],
   loading: false,
   async fetch() {
-    const { data, isError } = await fetchRequest<RemixCreators>({
-      url: "/category",
+    const {
+      data: {
+        result: { result },
+      },
+      isError,
+    } = await fetchRequest<CreatorsApiImpl>({
+      url: constants.user.remixCreators,
+    });
+    result.forEach((creator) => {
+      creator.label = creator.name;
+      creator.value = creator.name;
     });
     set({
-      creators: isError ? [] : data.result,
+      creators: isError ? [] : result,
       loading: false,
     });
   },

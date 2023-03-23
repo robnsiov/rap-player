@@ -7,6 +7,7 @@ import useCurrentStatusMusicStore from "../../../../store/current-status-music-s
 import useMusicDemoStore from "../../../../store/music-demo-store";
 import useActivePlaylistStore from "../../../../store/active-playlist";
 import useTopMusicsStore from "../../../../store/top-musics-store";
+import useFirstPlayStore from "../../../../store/first-play-store";
 
 const usePlayer = () => {
   const [index, singleMusicChange] = useSingleMusicStore((state) => [
@@ -29,6 +30,7 @@ const usePlayer = () => {
 
   const [playlistType] = useActivePlaylistStore((state) => [state.playlist]);
   const [topMusics] = useTopMusicsStore((state) => [state.musics]);
+  const [setFirstPlay] = useFirstPlayStore((state) => [state.setFirst]);
 
   const playerRef = useRef<AudioPlayer>(null);
 
@@ -55,6 +57,7 @@ const usePlayer = () => {
 
   const onPlay = () => {
     // clearDemo();
+    setFirstPlay(true);
     onChangeCurrentStatusMusic({ played: true });
   };
   const onPause = () => {

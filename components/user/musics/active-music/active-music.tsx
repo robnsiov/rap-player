@@ -10,6 +10,8 @@ import {
 import { Fragment, useState } from "react";
 import useActiveMusic from "./use-active-music";
 import FadeAnimation from "../../../share/animations/fade/fade-animation";
+import { constants } from "../../../../constants/constants";
+import imageUrl from "../../../../utils/image-url/image-url";
 const ActiveMusic = () => {
   const {
     showMusicPage,
@@ -37,7 +39,7 @@ const ActiveMusic = () => {
           >
             <div className="w-[40px] h-[40px] rounded-xl overflow-hidden mr-3">
               <Image
-                src={cover}
+                src={imageUrl(cover)}
                 className="object-cover object-center w-full h-full"
                 width={40}
                 height={40}

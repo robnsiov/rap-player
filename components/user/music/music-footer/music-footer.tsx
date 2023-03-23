@@ -4,6 +4,7 @@ import { HiHome, HiOutlineDownload } from "react-icons/hi";
 import { AiTwotoneFire } from "react-icons/ai";
 import useMusicFooter from "./use-music-footer";
 import musicFooterImpl from "./types";
+import musicUrl from "../../../../utils/music-url/music-url";
 const MusicFooter = ({ href }: musicFooterImpl) => {
   const { onClickhomeIcon, onClickSearchIcon, OnclickHotMusicsIcon } =
     useMusicFooter();
@@ -19,7 +20,7 @@ const MusicFooter = ({ href }: musicFooterImpl) => {
           icon={BsSearch}
         />
         <FooterItem
-          href={href}
+          href={musicUrl(href)}
           link={true}
           title="Download"
           icon={HiOutlineDownload}

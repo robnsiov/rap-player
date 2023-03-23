@@ -9,6 +9,7 @@ import BtnWrapper from "./btn-wrapper/btn-wrapper";
 import PlayerImpl from "./types";
 import usePlayer from "./use-player";
 import Volume from "./volume/volume";
+import musicUrl from "../../../../utils/music-url/music-url";
 
 const Player = ({ src }: PlayerImpl) => {
   const {
@@ -23,13 +24,12 @@ const Player = ({ src }: PlayerImpl) => {
     changeVolume,
     onEndedMusic,
   } = usePlayer();
-
   return (
     <>
       <div className="w-full">
         <AudioPlayer
           ref={playerRef}
-          src={src}
+          src={musicUrl(src)}
           showSkipControls={true}
           onClickNext={nextTrack}
           onPlay={onPlay}

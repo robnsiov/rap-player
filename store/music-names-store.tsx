@@ -21,6 +21,6 @@ const useMusicNamesStore = create<MusicNamesStoreImpl>((set) => ({
   },
 }));
 
-useMusicNamesStore.getState().fetch();
+// useMusicNamesStore.getState().fetch();
 
 export default useMusicNamesStore;

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import FadeScaleAnimation from "../../../share/animations/fade-scale/fade-scale-animation";
 import MusicBackdropImpl from "./types";
 import Backdrop from "../../../share/backdrop/backdrop";
+import { constants } from "../../../../constants/constants";
+import imageUrl from "../../../../utils/image-url/image-url";
 
 const MusicBackdrop = ({
   src,
@@ -28,7 +30,7 @@ const MusicBackdrop = ({
         >
           <div className="w-[280px] h-[280px] 340px:w-full 340px:height-unset 340px:aspect-square">
             <Image
-              src={src}
+              src={imageUrl(src)}
               alt="music-cover"
               priority
               width={280}

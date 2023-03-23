@@ -111,7 +111,6 @@ const useAdminUploader = () => {
     prm.then((data) => {
       setTableLoading(false);
       const output = data as Array<Array<string>>;
-      console.log(output);
       const start = +pageData.activePage * pageData.perPage - pageData.perPage;
       const end = start + pageData.perPage;
       setTotalPages(Math.ceil(output[0].length / pageData.perPage));

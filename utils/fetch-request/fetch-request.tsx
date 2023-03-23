@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { constants } from "../../constants/constants";
 
 interface FetchRequestImpl {
   method?: "GET" | "DELETE" | "PUT" | "PATCH" | "POST";
@@ -13,7 +14,7 @@ interface FetchRequestImpl {
   onBefore?(): void;
 }
 interface OutputFetchRequest<T> {
-  data: { result: T | []; error: {} | null | [] };
+  data: { result: T; error: {} | null | [] };
   status: number;
   isError: boolean;
 }
@@ -23,7 +24,7 @@ const defaultFtech = () => {};
 async function fetchRequest<T>({
   method = "GET",
   url,
-  baseURL = "http://localhost:5000",
+  baseURL = constants.baseURL,
   inputData = {},
   onSuccess = defaultFtech,
   onBadRequestError = defaultFtech,
@@ -35,7 +36,7 @@ async function fetchRequest<T>({
   const requestOutput: OutputFetchRequest<T> = {
     isError: false,
     status: -1,
-    data: { result: [], error: null },
+    data: { result: {}, error: null },
   };
   onBefore();
   try {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useCurrentStatusMusicStore from "../../../../store/current-status-music-store";
 import useMusicDemoStore from "../../../../store/music-demo-store";
 import useSingleMusicStore from "../../../../store/single-music-store";
+import demoUrl from "../../../../utils/demo-url/demo-url";
 
 const useDemoMusic = () => {
   const [demo, title, setDemo] = useMusicDemoStore((state) => [
@@ -17,22 +18,18 @@ const useDemoMusic = () => {
   const [index] = useSingleMusicStore((state) => [state.index]);
 
   useEffect(() => {
-    
     audio.addEventListener("ended", () => {
       setDemo({ title: "", demo: "" });
     });
-
-
   }, []);
 
   const clearDemo = () => {
     setDemo({ demo: "", title: "" });
     if (index !== -1) onChangeCurrentStatusMusic({ played: true });
   };
-
   useEffect(() => {
     if (demo.length !== 0) {
-      audio.src = demo;
+      audio.src = demoUrl(demo);
       audio.play();
     } else {
       audio.src = "";

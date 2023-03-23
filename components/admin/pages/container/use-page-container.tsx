@@ -76,7 +76,6 @@ function usePageContainer<Values, Value, SelectedRow>({
     }
     setOpenModal(true);
     onSelectedRow(data);
-    console.log(data);
     setSelectedRow(res as SelectedRow & { selected: { id: number } });
   };
 

@@ -12,6 +12,7 @@ import Player from "./player/player";
 import MusicFooter from "./music-footer/music-footer";
 import { HiLink } from "react-icons/hi";
 import FadeAnimation from "../../share/animations/fade/fade-animation";
+import imageUrl from "../../../utils/image-url/image-url";
 
 const Music = () => {
   const {
@@ -28,12 +29,13 @@ const Music = () => {
     src,
     showCopyMessage,
     changeCopyMessageShowing,
+    likeMusic,
+    dislikeMusic,
+    likedMusics,
   } = useMusic();
-  const [like, setLike] = useState(false);
   if (id === -1) return null;
   return (
     <>
-      {/* <MusicContainer className="mr-4 md:absolute md:left-2 md:w-[calc(100%-17px)] md:h-[calc(100%-17px)] md:top-2  md:z-[500] md:mr-0"> */}
       <MusicContainer
         innerClassName="justify-between"
         className={`duration-200 opacity-100 visible transition-all mr-4 md:absolute 
@@ -63,7 +65,7 @@ const Music = () => {
           >
             <div className="absolute inset-0 z-20  flex justify-center items-center">
               <Image
-                src={cover}
+                src={imageUrl(cover)}
                 alt="music-cover"
                 priority
                 width={280}
@@ -73,7 +75,7 @@ const Music = () => {
             </div>
             <div className="absolute  inset-y-0  inset-x-4 translate-y-12 z-10 flex justify-center items-center">
               <Image
-                src={cover}
+                src={imageUrl(cover)}
                 alt="music-cover"
                 priority
                 width={280}
@@ -83,14 +85,16 @@ const Music = () => {
             </div>
           </div>
           <div className="w-full flex justify-between items-center mt-9 text-white relative z-50">
-            <HeartAnimation
-              onClick={() => setLike((prev) => !prev)}
-              first={
-                <RiHeart2Line className="text-xl cursor-pointer text-gray-400" />
-              }
-              next={<RiHeart2Fill className="text-xl cursor-pointer" />}
-              show={like ? "next" : "first"}
-            />
+            <div className="text-xl cursor-pointer">
+              <HeartAnimation
+                onClick={() => {
+                  id in likedMusics ? dislikeMusic(id) : likeMusic(id);
+                }}
+                first={<RiHeart2Line className="text-gray-400" />}
+                next={<RiHeart2Fill />}
+                show={id in likedMusics ? "next" : "first"}
+              />
+            </div>
 
             <h3 className="text-white text-2xl font-semibold w-[150px] truncate text-center">
               {title}

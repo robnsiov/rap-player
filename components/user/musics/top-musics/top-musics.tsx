@@ -11,6 +11,8 @@ import { BsPlayCircle } from "react-icons/bs";
 import useTopMusics from "./use-top-musics";
 import SkeletonLoading from "../../../share/skeleton/skeleton";
 import FadeAnimation from "../../../share/animations/fade/fade-animation";
+import { constants } from "../../../../constants/constants";
+import imageUrl from "../../../../utils/image-url/image-url";
 
 const TopMusics = () => {
   const { fetchStatus, musics, clickOnMusic } = useTopMusics();
@@ -58,7 +60,7 @@ const TopMusics = () => {
                     <div className="absolute inset-0">
                       <Image
                         className="h-full w-full object-cover object-top"
-                        src={cover}
+                        src={imageUrl(cover)}
                         width={280}
                         height={180}
                         alt="music"

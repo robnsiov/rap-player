@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 
 const useLanding = () => {
   const [hide, setHide] = useState(!false);
