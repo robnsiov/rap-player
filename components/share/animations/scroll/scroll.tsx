@@ -27,9 +27,9 @@ const Scroll = ({ children, count }: ScrollImpl) => {
     }
   };
   useEffect(() => {
-    // console.log(lastPage);
+    console.log(lastPage, page);
     if (page !== 1) {
-      if (page <= (lastPage as number) || lastPage === undefined) {
+      if (page <= (lastPage as number)) {
         paginationFetch(page);
       }
     }

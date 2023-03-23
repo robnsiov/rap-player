@@ -27,12 +27,14 @@ interface MusicsImpl {
 }
 
 interface MusicsApiImpl {
-  result: { data: Array<MusicImpl> };
-  last_page: number;
-  to: number;
-  total: number;
-  per_page: number;
-  from: number;
+  result: {
+    data: Array<MusicImpl>;
+    last_page: number;
+    to: number;
+    total: number;
+    per_page: number;
+    from: number;
+  };
 }
 
 const useMusicsStore = create<MusicsImpl>((set, get) => ({
@@ -54,12 +56,16 @@ const useMusicsStore = create<MusicsImpl>((set, get) => ({
       },
     });
     useSingleMusicStore.getState().onChange(result.data[0] as SingleMusic);
-    set({ musics: isError ? [] : result.data, status: "done" });
+    set({
+      musics: isError ? [] : result.data,
+      status: "done",
+      lastPage: result.last_page,
+    });
   },
   async paginationFetch(page) {
     const {
       data: {
-        result: { result, last_page },
+        result: { result },
       },
       isError,
     } = await fetchRequest<MusicsApiImpl>({
@@ -68,13 +74,10 @@ const useMusicsStore = create<MusicsImpl>((set, get) => ({
         set({ infinityLoading: true });
       },
     });
-    console.log(page, result);
-    // useSingleMusicStore.getState().onChange(result[0] as SingleMusic);
-    // console.log(last_page);
     set({
       musics: isError ? [] : [...get().musics, ...result.data],
       infinityLoading: false,
-      lastPage: last_page as number,
+      lastPage: result.last_page as number,
       useInfinit: true,
     });
   },

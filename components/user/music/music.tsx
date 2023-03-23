@@ -88,11 +88,11 @@ const Music = () => {
             <div className="text-xl cursor-pointer">
               <HeartAnimation
                 onClick={() => {
-                  id in likedMusics ? dislikeMusic(id) : likeMusic(id);
+                  likedMusics.includes(id) ? dislikeMusic(id) : likeMusic(id);
                 }}
                 first={<RiHeart2Line className="text-gray-400" />}
                 next={<RiHeart2Fill />}
-                show={id in likedMusics ? "next" : "first"}
+                show={likedMusics.includes(id) ? "next" : "first"}
               />
             </div>
 
