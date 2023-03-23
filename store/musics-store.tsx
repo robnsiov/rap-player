@@ -22,7 +22,7 @@ interface MusicsImpl {
   fetch(): void;
   paginationFetch(page: number): void;
   paginationFilters(page: number, filters: {}): void;
-  filters(filters: {}): void;
+  filters(filters: {}, end: () => void): void;
   useInfinit: boolean;
 }
 
@@ -55,7 +55,8 @@ const useMusicsStore = create<MusicsImpl>((set, get) => ({
         set({ status: "loading" });
       },
     });
-    useSingleMusicStore.getState().onChange(result.data[0] as SingleMusic);
+    if (result.data[0])
+      useSingleMusicStore.getState().onChange(result.data[0] as SingleMusic);
     set({
       musics: isError ? [] : result.data,
       status: "done",
@@ -95,17 +96,29 @@ const useMusicsStore = create<MusicsImpl>((set, get) => ({
       useInfinit: true,
     });
   },
-  async filters(filters) {
-    const { data, isError } = await fetchRequest<Array<MusicImpl>>({
+  async filters(filters, end) {
+    const {
+      data: { result },
+      isError,
+    } = await fetchRequest<MusicsApiImpl>({
       method: "POST",
-      url: "/musics",
+      url: constants.user.filters,
       inputData: filters,
+      onEnd() {
+        end();
+      },
       onBefore() {
         set({ filtersLoading: true });
       },
     });
-    useSingleMusicStore.getState().onChange(data.result[0] as SingleMusic);
-    set({ musics: isError ? [] : data.result, filtersLoading: false });
+    console.log(result);
+    // if (result.data[0])
+    //   useSingleMusicStore.getState().onChange(result.data[0] as SingleMusic);
+    // set({
+    //   musics: isError ? [] : result.data,
+    //   filtersLoading: false,
+    //   lastPage: result.last_page,
+    // });
   },
 }));
 

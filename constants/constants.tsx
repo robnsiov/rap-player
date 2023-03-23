@@ -13,5 +13,6 @@ export const constants = {
     topMusics: "/tops",
     like: "/like",
     dislike: "/unLike",
+    filters: "/musicByFilter",
   },
 };

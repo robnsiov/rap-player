@@ -25,7 +25,7 @@ const MusicsFilter = () => {
     remixCreatorNames,
     categoriesLoading,
     artistsLoading,
-    remixCreatorsLoading,
+    featsLoading,
   } = useMusicsFilter();
 
   return (
@@ -93,9 +93,9 @@ const MusicsFilter = () => {
                 />
                 <MultiSelectFilter
                   onChange={(seleted) =>
-                    changeMultiSelectOnFilterData("remixCreators", seleted)
+                    changeMultiSelectOnFilterData("feats", seleted)
                   }
-                  loading={remixCreatorsLoading}
+                  loading={featsLoading}
                   placeholder="Remix Creators"
                   options={remixCreatorNames as object[]}
                 />

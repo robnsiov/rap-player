@@ -4,6 +4,7 @@ import useArtistsStore from "../../../../store/artists-store";
 import useCategoriesStore from "../../../../store/categories-store";
 import useFiltersLoaderStore from "../../../../store/filters-loader-store";
 import useMusicNamesStore from "../../../../store/music-names-store";
+import useMusicsStore from "../../../../store/musics-store";
 import useRemixCreatorsStore from "../../../../store/remix-creators-store";
 import useShowFiltersStore from "../../../../store/show-filters";
 import { AutocompleteInput } from "../../../share/autocomplete-input/types";
@@ -22,7 +23,7 @@ interface FilterData {
   title?: string;
   artsist?: Array<number>;
   categories?: Array<number>;
-  remixCreators?: Array<number>;
+  feats?: Array<number>;
 }
 type MusicNames = Array<AutocompleteInput>;
 
@@ -41,7 +42,7 @@ const useMusicsFilter = () => {
     title: "",
     artsist: [],
     categories: [],
-    remixCreators: [],
+    feats: [],
   });
   const [musicNames, setMusicNames] = useState<MusicNames>([]);
   const [artistNames, setArtistNames] = useState<MultiSelectInput>([]);
@@ -58,14 +59,16 @@ const useMusicsFilter = () => {
     state.artists,
     state.loading,
   ]);
-  const [remixCreators, remixCreatorsLoading] = useRemixCreatorsStore(
-    (state) => [state.creators, state.loading]
-  );
+  const [feats, featsLoading] = useRemixCreatorsStore((state) => [
+    state.creators,
+    state.loading,
+  ]);
   const [musicNamesData] = useMusicNamesStore((state) => [state.musicMames]);
 
   const [showFiltersLoader] = useFiltersLoaderStore((state) => [
     state.showLoader,
   ]);
+  const [musicFilters] = useMusicsStore((state) => [state.filters]);
 
   useEffect(() => {
     console.log(filterData);
@@ -87,7 +90,7 @@ const useMusicsFilter = () => {
     key: keyof FilterData,
     selected: MultiSelectInput
   ) => {
-    // artists, categories, remixCreators
+    // artists, categories, feats
     const arrayOfIds = selected.map(({ id }) => id);
     setFilterData((prev) => ({ ...prev, [key]: arrayOfIds }));
   };
@@ -100,16 +103,16 @@ const useMusicsFilter = () => {
   const applyFilters = () => {
     const filters = cloneDeep(filterData);
     if (isEmpty(filters.artsist)) delete filters.artsist;
-    if (isEmpty(filters.remixCreators)) delete filters.remixCreators;
+    if (isEmpty(filters.feats)) delete filters.feats;
     if (isEmpty(filters.categories)) delete filters.categories;
     // title is musicName
     if (filters.title?.length === 0) delete filters.title;
     console.log(filters);
     // call api
     showFiltersLoader(true);
-    setTimeout(() => {
+    musicFilters(filters, () => {
       showFiltersLoader(false);
-    }, 5000);
+    });
     closeFilters();
   };
 
@@ -121,8 +124,8 @@ const useMusicsFilter = () => {
   }, [artists]);
 
   useEffect(() => {
-    setRemixCreatorNames(remixCreators);
-  }, [remixCreators]);
+    setRemixCreatorNames(feats);
+  }, [feats]);
 
   useEffect(() => {
     setMusicNames(musicNamesData);
@@ -141,7 +144,7 @@ const useMusicsFilter = () => {
     remixCreatorNames,
     categoriesLoading,
     artistsLoading,
-    remixCreatorsLoading,
+    featsLoading,
     applyFilters,
   };
 };
