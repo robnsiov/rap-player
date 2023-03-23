@@ -8,15 +8,14 @@ const FooterItem = ({
   onClick = () => {},
   link = false,
   href = "",
+  className = "",
 }: FootetItemImpl) => {
   return (
     <>
       <ScaleAnimation activeClassName="active:scale[0.9]">
         <div
           onClick={onClick}
-          className={
-            "group cursor-pointer flex items-center text-center flex-col justify-center relative text-gray-400"
-          }
+          className={`group cursor-pointer flex items-center text-center flex-col justify-center relative text-gray-400 ${className}`}
         >
           {link ? (
             <Link

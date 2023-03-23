@@ -23,6 +23,7 @@ const MusicFooter = ({ href }: musicFooterImpl) => {
           href={musicUrl(href)}
           link={true}
           title="Download"
+          className="relative left-2.5"
           icon={HiOutlineDownload}
         />
         <FooterItem

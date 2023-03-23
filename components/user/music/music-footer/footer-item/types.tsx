@@ -6,4 +6,5 @@ export default interface FootetItemImpl {
   icon: IconType;
   link?: boolean;
   href?: string;
+  className?: string
 }
