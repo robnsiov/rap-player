@@ -15,4 +15,9 @@ export const constants = {
     dislike: "/unLike",
     filters: "/musicByFilter",
   },
+  admin: {
+    artists: "/artist",
+    feats: "/feat",
+    categories: "/category",
+  },
 };

@@ -37,7 +37,7 @@ function usePageContainer<Values, Value, SelectedRow>({
   const [dataSource, setDataResource] = useState<Array<JSX.Element>>([]);
   const [pages, setPages] = useState({
     total: 0,
-    active: searchParams.get("_page") ?? 1,
+    active: searchParams.get("page") ?? 1,
   });
   const [tableLoading, setTableLoading] = useState(true);
   const [tableError, setTableError] = useState(false);
@@ -81,8 +81,11 @@ function usePageContainer<Values, Value, SelectedRow>({
 
   const getData = async (activePage?: number) => {
     setTableLoading(true);
-    const { data, isError } = await fetchRequest<Values>({
-      url: `${path}?_page=${activePage ?? pages.active}`,
+    const { data, isError } = await fetchRequest<{
+      data: Values;
+      last_page: number;
+    }>({
+      url: `${path}?page=${activePage ?? pages.active}`,
       onEnd() {
         setTableLoading(false);
       },
@@ -94,13 +97,13 @@ function usePageContainer<Values, Value, SelectedRow>({
     }
 
     setTableError(false);
-    const rows = createRows({ data: data.result as Values, clickOnRow });
-    setPages((prev) => ({ ...prev, total: 2 }));
+    const rows = createRows({ data: data.result.data as Values, clickOnRow });
+    setPages((prev) => ({ ...prev, total: data.result.last_page }));
     setDataResource(rows);
   };
 
   const onChangePage = (page: number) => {
-    if (!openByAnother) router.push(`${pathname}?_page=${page}`);
+    if (!openByAnother) router.push(`${pathname}?page=${page}`);
     getData(page);
     setPages((prev) => ({ ...prev, active: page }));
   };

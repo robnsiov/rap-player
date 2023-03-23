@@ -89,7 +89,7 @@ const useAdminUploader = () => {
 
   const copyToClipboard = (src: string, cover: string, demo: string) => {
     makeToast({ message: "Item(s) were copied", type: "success" });
-    // 
+    //
     navigator.clipboard.writeText(`**${src}@${cover}@${demo}##`);
   };
 
@@ -110,7 +110,8 @@ const useAdminUploader = () => {
     const prm = Promise.all([resources, covers, demos]);
     prm.then((data) => {
       setTableLoading(false);
-      const output = data as Array<Array<string>>;
+      let output = data as Array<Array<string>>;
+      if (!output) output = [[], [], []];
       const start = +pageData.activePage * pageData.perPage - pageData.perPage;
       const end = start + pageData.perPage;
       setTotalPages(Math.ceil(output[0].length / pageData.perPage));
@@ -119,9 +120,7 @@ const useAdminUploader = () => {
       const dm = output[2].slice(start, end);
       const rows = cv.map((_, i) => (
         <tr key={sr[i] + cv[i] + dm[i]}>
-          <td>
-            <MusicRow data={sr[i]} />
-          </td>
+          <td>{sr[i].length !== 0 && <MusicRow data={sr[i]} />}</td>
           <td>
             {cv[i].length !== 0 && (
               <div className="w-[60px] h-[60px]">
@@ -129,9 +128,7 @@ const useAdminUploader = () => {
               </div>
             )}
           </td>
-          <td>
-            <MusicRow data={dm[i]} />
-          </td>
+          <td>{dm[i].length !== 0 && <MusicRow data={dm[i]} />}</td>
           <td>
             <span
               onClick={() => copyToClipboard(sr[i], cv[i], dm[i])}
@@ -161,9 +158,13 @@ const useAdminUploader = () => {
       formData.append("cover", filesData.cover);
     if (inputsData.demo.length !== 0) formData.append("demo", filesData.demo);
     if (inputsData.src.length !== 0) formData.append("src", filesData.src);
-    const { data, isError } = await fetchRequest({
+    const { data, isError } = await fetchRequest<{
+      src: [] | string;
+      cover: [] | string;
+      demo: [] | string;
+    }>({
       method: "POST",
-      url: "/",
+      url: "/upload",
       inputData: formData,
       onEnd() {
         setLoading(false);
@@ -171,31 +172,33 @@ const useAdminUploader = () => {
     });
     if (isError) {
       makeToast({ message: "Failed to upload file(s)", type: "error" });
-      // return;
+      return;
     }
     makeToast({ message: "File(s) uploaded successfully", type: "success" });
     closeModal();
     setInputsData({ cover: "", demo: "", src: "" });
     setFilesData({} as FilesData);
-
-    const cover = localForage.getItem("cover").then((value) => {
+    let demo, src, cover;
+    cover = localForage.getItem("cover").then((value) => {
       const array = value as Array<string>;
       array.unshift(
-        "https://songha.ir/wp-content/uploads/2020/09/naaji-vasiat-2.jpg"
+        Array.isArray(data.result.cover) ? "" : (data.result.cover as string)
       );
       localForage.setItem("cover", array);
     });
-    const src = localForage.getItem("src").then((value) => {
+
+    src = localForage.getItem("src").then((value) => {
       const array = value as Array<string>;
       array.unshift(
-        "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3"
+        Array.isArray(data.result.src) ? "" : (data.result.src as string)
       );
       localForage.setItem("src", array);
     });
-    const demo = localForage.getItem("demo").then((value) => {
+
+    demo = localForage.getItem("demo").then((value) => {
       const array = value as Array<string>;
       array.unshift(
-        "https://file.songha.ir/N/Naaji/Single/Naaji.Vasiat2.128.Songha.ir.mp3"
+        Array.isArray(data.result.demo) ? "" : (data.result.demo as string)
       );
       localForage.setItem("demo", array);
     });

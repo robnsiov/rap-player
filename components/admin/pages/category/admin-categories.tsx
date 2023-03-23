@@ -1,6 +1,7 @@
 "use client";
 
 import { Form, Formik } from "formik";
+import { constants } from "../../../../constants/constants";
 import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
 import AdminCategoryImpl, { Categories, Category, SelectedRow } from "./types";
@@ -62,7 +63,7 @@ const AdminCategory = ({
         createRows={createRows}
         Form={ModalForm}
         onSelectedRow={change}
-        path="/categories"
+        path={constants.admin.categories}
         title="Categories"
         modalTitle="Category"
         openByAnother={openByAnother}

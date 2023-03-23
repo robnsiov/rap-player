@@ -45,6 +45,9 @@ async function fetchRequest<T>({
       url,
       method,
       data: inputData,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     onSuccess();
     requestOutput.data.result = data;

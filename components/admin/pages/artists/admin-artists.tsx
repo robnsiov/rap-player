@@ -1,6 +1,7 @@
 "use client";
 
 import { Form, Formik } from "formik";
+import { constants } from "../../../../constants/constants";
 import TextInput from "../../../share/admin/text-input/text-input";
 import PageContainer from "../container/page-container";
 import { Artists, Artist, SelectedRow } from "./types";
@@ -59,7 +60,7 @@ const AdminArtists = () => {
         createRows={createRows}
         Form={ModalForm}
         onSelectedRow={change}
-        path="/artists"
+        path={constants.admin.artists}
         title="Artists"
       />
     </>
