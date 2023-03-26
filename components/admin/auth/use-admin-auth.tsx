@@ -4,7 +4,6 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import makeToast from "../../../utils/toast";
 import { useRouter } from "next/navigation";
 import fetchRequest from "../../../utils/fetch-request/fetch-request";
-import { constant } from "lodash";
 import { constants } from "../../../constants/constants";
 import { FormikHelpers } from "formik";
 
@@ -14,6 +13,10 @@ interface DefaultValues {
   email: string;
   password: string;
 }
+interface AuthApi {
+  result: { token: string };
+}
+
 const useAdminAuth = () => {
   const router = useRouter();
   const [activityType, setActivityType] = useState<ActivityType>("signin");
@@ -42,7 +45,14 @@ const useAdminAuth = () => {
     { email, password }: DefaultValues,
     actions: FormikHelpers<DefaultValues>
   ) => {
-    const { isError, data } = await fetchRequest<{ token: string }>({
+    const {
+      isError,
+      data: {
+        result: {
+          result: { token },
+        },
+      },
+    } = await fetchRequest<AuthApi>({
       method: "POST",
       url: constants.admin.signup,
       inputData: {
@@ -60,15 +70,21 @@ const useAdminAuth = () => {
       actions.setErrors({ email: "duplicate email" });
       return;
     }
-
     makeToast({ message: "Registration successfuly", type: "success" });
-    goToAdmin(data.result.token);
+    goToAdmin(token);
   };
   const adminSignin = async (
     { email, password }: DefaultValues,
     actions: FormikHelpers<DefaultValues>
   ) => {
-    const { isError, data } = await fetchRequest<{ token: string }>({
+    const {
+      isError,
+      data: {
+        result: {
+          result: { token },
+        },
+      },
+    } = await fetchRequest<AuthApi>({
       method: "POST",
       url: constants.admin.signin,
       inputData: {
@@ -88,7 +104,7 @@ const useAdminAuth = () => {
       return;
     }
     makeToast({ message: "Login successfuly", type: "success" });
-    goToAdmin(data.result.token);
+    goToAdmin(token);
   };
 
   const onSubmitForm = (
