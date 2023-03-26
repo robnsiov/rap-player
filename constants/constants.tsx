@@ -19,5 +19,7 @@ export const constants = {
     artists: "/artist",
     feats: "/feat",
     categories: "/category",
+    signin: "/login",
+    signup: "/register",
   },
 };

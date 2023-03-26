@@ -44,12 +44,12 @@ const AdminAuth = () => {
                   <TextInput
                     name="password"
                     label="Password"
-                    type="pass"
+                    type="password"
                     placeholder="Enter your password..."
                     error={errors.password}
                     touched={touched.password}
                   />
-                  <div className="w-full flex justify-center items-center mt-3">
+                  <div className="w-full flex justify-center items-center mt-4">
                     <div className="w-1/2">
                       <Button
                         onClick={() => changeActivitiyType("signin")}

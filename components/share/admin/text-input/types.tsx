@@ -9,5 +9,6 @@ export default interface TextInputImpl {
   name: string;
   readOnly?: boolean;
   className?: string;
+  focus?: boolean;
   inputProps?: {};
 }
