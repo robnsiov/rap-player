@@ -114,10 +114,13 @@ const useAdminUploader = () => {
       if (!output) output = [[], [], []];
       const start = +pageData.activePage * pageData.perPage - pageData.perPage;
       const end = start + pageData.perPage;
-      setTotalPages(Math.ceil(output[0].length / pageData.perPage));
-      const sr = output[0].slice(start, end);
-      const cv = output[1].slice(start, end);
-      const dm = output[2].slice(start, end);
+      setTotalPages(Math.ceil((output[0]?.length ?? 1) / pageData.perPage));
+      if (output[0] === null || output[1] === null || output[2] === null) {
+        return;
+      }
+      const sr = output[0].slice(start, end) ?? [];
+      const cv = output[1].slice(start, end) ?? [];
+      const dm = output[2].slice(start, end) ?? [];
       const rows = cv.map((_, i) => (
         <tr key={sr[i] + cv[i] + dm[i]}>
           <td>{sr[i].length !== 0 && <MusicRow data={sr[i]} />}</td>
