@@ -21,5 +21,6 @@ export const constants = {
     categories: "/category",
     signin: "/login",
     signup: "/register",
+    signout: "/refreshToken",
   },
 };

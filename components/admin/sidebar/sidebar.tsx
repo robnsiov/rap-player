@@ -2,6 +2,7 @@
 import useSidebar from "./use-sidebar";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./sidebar-item/sidebar-item";
+import SignOut from "./signout/signout";
 
 const Sidebar = () => {
   const { setClosesidebar, closeSidebar } = useSidebar();
@@ -42,7 +43,6 @@ const Sidebar = () => {
           >
             🎭
           </SidebarItem>
-
           <SidebarItem
             title="Categories"
             closeSidebar={closeSidebar}
@@ -57,6 +57,7 @@ const Sidebar = () => {
           >
             🧑‍🤝‍🧑
           </SidebarItem>
+          <SignOut icon="🛑" title="Signout" closeSidebar={closeSidebar} />
         </div>
       </div>
     </>
