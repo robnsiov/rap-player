@@ -1,9 +1,12 @@
 import AdminAuth from "../../../components/admin/auth/admin-auth";
+import Protected from "../../../components/share/layout/protected/protected";
 
 const Auth = () => {
   return (
     <>
-      <AdminAuth />
+      <Protected adminProtect={true}>
+        <AdminAuth />
+      </Protected>
     </>
   );
 };

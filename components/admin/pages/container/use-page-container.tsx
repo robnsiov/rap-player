@@ -82,8 +82,10 @@ function usePageContainer<Values, Value, SelectedRow>({
   const getData = async (activePage?: number) => {
     setTableLoading(true);
     const { data, isError } = await fetchRequest<{
-      data: Values;
-      last_page: number;
+      result: {
+        data: { result: Values };
+        last_page: number;
+      };
     }>({
       url: `${path}?page=${activePage ?? pages.active}`,
       onEnd() {
@@ -97,8 +99,11 @@ function usePageContainer<Values, Value, SelectedRow>({
     }
 
     setTableError(false);
-    const rows = createRows({ data: data.result.data as Values, clickOnRow });
-    setPages((prev) => ({ ...prev, total: data.result.last_page }));
+    const rows = createRows({
+      data: data.result.result.data as Values,
+      clickOnRow,
+    });
+    setPages((prev) => ({ ...prev, total: data.result.result.last_page }));
     setDataResource(rows);
   };
 

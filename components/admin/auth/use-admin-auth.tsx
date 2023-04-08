@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import fetchRequest from "../../../utils/fetch-request/fetch-request";
 import { constants } from "../../../constants/constants";
 import { FormikHelpers } from "formik";
+import { setCookie } from "../../../utils/cookie/cookie";
 
 type ActivityType = "signin" | "signup";
 type AcivityLoader = ActivityType | undefined;
@@ -38,7 +39,7 @@ const useAdminAuth = () => {
     setActivityLoader(value);
   };
   const goToAdmin = (token: string) => {
-    localStorage.setItem("token", token);
+    setCookie("token", token, 60);
     router.replace("/admin");
   };
   const adminSignup = async (

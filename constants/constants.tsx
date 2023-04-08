@@ -22,5 +22,6 @@ export const constants = {
     signin: "/login",
     signup: "/register",
     signout: "/refreshToken",
+    profile: "/user",
   },
 };

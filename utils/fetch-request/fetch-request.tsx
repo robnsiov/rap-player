@@ -1,9 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { constants } from "../../constants/constants";
+import { getCookie } from "../cookie/cookie";
 
 interface FetchRequestImpl {
   method?: "GET" | "DELETE" | "PUT" | "PATCH" | "POST";
   url: string;
+  token?: string;
   baseURL?: string;
   inputData?: any;
   onError?(): void;
@@ -24,6 +26,7 @@ const defaultFtech = () => {};
 async function fetchRequest<T>({
   method = "GET",
   url,
+  token = "",
   baseURL = constants.baseURL,
   inputData = {},
   onSuccess = defaultFtech,
@@ -40,13 +43,17 @@ async function fetchRequest<T>({
   };
   onBefore();
   try {
+    let tk = token;
+    if (!tk) {
+      tk = getCookie("token");
+    }
     const { data, status } = await axios({
       baseURL,
       url,
       method,
       data: inputData,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${tk}`,
       },
     });
     onSuccess();
